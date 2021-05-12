@@ -6,24 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.squidward.xyz">
-  <title>nmap使用心得 | Squidward的个人博客</title>
+  <title>nmap使用详解 | Squidward的个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="nmap使用心得 + 常用指令">
+  <meta name="description" content="Nmap使用详解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nmap使用心得">
+<meta property="og:title" content="nmap使用详解">
 <meta property="og:url" content="http://www.squidward.xyz/2021/05/10/nmap%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/index.html">
 <meta property="og:site_name" content="Squidward的个人博客">
-<meta property="og:description" content="nmap使用心得 + 常用指令">
+<meta property="og:description" content="Nmap使用详解">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://www.squidward.xyz/img/blog/nmap.jpg">
 <meta property="article:published_time" content="2021-05-10T11:28:40.000Z">
-<meta property="article:modified_time" content="2021-05-10T11:34:25.203Z">
+<meta property="article:modified_time" content="2021-05-12T03:43:46.495Z">
 <meta property="article:author" content="Squidward">
 <meta property="article:tag" content="Tools">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.squidward.xyz/img/blog/nmap.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Squidward的个人博客" type="application/atom+xml">
   
@@ -203,7 +201,7 @@
   
   
     <h1 class="article-title" itemprop="name">
-      nmap使用心得
+      nmap使用详解
     </h1>
   
 
@@ -229,7 +227,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">20字</span>
+      <span class="post-count">6.9k字</span>
     </span>
   </span>
 
@@ -238,7 +236,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">26分</span>
     </span>
   </span>
 </div>
@@ -249,13 +247,178 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>nmap使用心得 + 常用指令</p>
+    <p>Nmap使用详解</p>
 <a id="more"></a>
 
 
 
-<p><img src="https://www.squidward.xyz/img/blog/nmap.jpg" alt="image"></p>
-<p>转载于:  <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_55779207/article/details/115712640">https://blog.csdn.net/m0_55779207/article/details/115712640</a></p>
+<h3 id="Nmap简介"><a href="#Nmap简介" class="headerlink" title="Nmap简介"></a>Nmap简介</h3><p>Nmap包含四项基本功能：</p>
+<ul>
+<li>主机发现 (Host Discovery)</li>
+<li>端口扫描 (Port Scanning)</li>
+<li>版本侦测 (Version Detection)</li>
+<li>操作系统侦测 (Operating System Detection)</li>
+</ul>
+<p>这四项功能之间存在大致的依赖关系：首先进行主机发现，随后确定端口开放状态，根据开放的端口确定运行的具体应用程序和版本信息，然后可以进行操作系统的侦测。</p>
+<p>在四项功能的基础上，nmap还提供防火墙和IDS（入侵检测系统）的规避技巧，可以综合运用到各个阶段。此外nmap还提供强大的NSE脚本引擎功能，可以对基本功能进行补充和扩展。</p>
+<p>先整理一些nmap的参数及意义</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">iflist : 查看本地主机的接口信息和路由信息</span><br><span class="line">-A ：选项用于使用进攻性方式扫描</span><br><span class="line">-T4： 指定扫描过程使用的时序，总有<span class="number">6</span>个级别（<span class="number">0</span>-<span class="number">5</span>），级别越高，扫描速度越快，但也容易被防火墙或IDS检测并屏蔽掉，在网络通讯状况较好的情况下推荐使用T4</span><br><span class="line">-oX test.xml： 将扫描结果生成 test.xml 文件，如果中断，则结果打不开</span><br><span class="line">-oA test.xml:  将扫描结果生成 test.xml 文件，中断后，结果也可保存</span><br><span class="line">-oG test.txt:  将扫描结果生成 test.txt 文件</span><br><span class="line">-sn : 只进行主机发现，不进行端口扫描</span><br><span class="line">-O : 指定Nmap进行系统版本扫描</span><br><span class="line">-sV: 指定让Nmap进行服务版本扫描</span><br><span class="line">-p &lt;port ranges&gt;: 扫描指定的端口</span><br><span class="line">-sS/sT/sA/sW/sM:指定使用 TCP SYN/Connect()/ACK/Window/Maimon scans的方式来对目标主机进行扫描</span><br><span class="line">-sU: 指定使用UDP扫描方式确定目标主机的UDP端口状况</span><br><span class="line">-script &lt;script name&gt; : 指定扫描脚本</span><br><span class="line">-Pn ： 不进行<span class="built_in">ping</span>扫描</span><br><span class="line">-sP :  用<span class="built_in">ping</span>扫描判断主机是否存活，只有主机存活，nmap才会继续扫描，一般最好不加，因为有的主机会禁止<span class="built_in">ping</span></span><br><span class="line">-PI :  设置这个选项，让nmap使用真正的<span class="built_in">ping</span>(ICMP <span class="built_in">echo</span>请求)来扫描目标主机是否正在运行。</span><br><span class="line">-iL <span class="number">1</span>.txt : 批量扫描<span class="number">1</span>.txt中的目标地址</span><br><span class="line"> </span><br><span class="line">-sL: List Scan 列表扫描，仅将指定的目标的IP列举出来，不进行主机发现</span><br><span class="line">-sY/sZ: 使用SCTP INIT/COOKIE-<span class="built_in">ECHO</span>来扫描SCTP协议端口的开放的情况</span><br><span class="line">-sO: 使用IP protocol 扫描确定目标机支持的协议类型</span><br><span class="line">-PO : 使用IP协议包探测对方主机是否开启 </span><br><span class="line">-PE/PP/PM : 使用ICMP <span class="built_in">echo</span>、 ICMP timestamp、ICMP netmask 请求包发现主机</span><br><span class="line">-PS/PA/PU/PY : 使用TCP SYN/TCP ACK或SCTP INIT/<span class="built_in">ECHO</span>方式进行发现</span><br><span class="line">-sN/sF/sX: 指定使用TCP Null, FIN, and Xmas scans秘密扫描方式来协助探测对方的TCP端口状态</span><br><span class="line">-e eth0：指定使用eth0网卡进行探测</span><br><span class="line">-f : --mtu &lt;val&gt;: 指定使用分片、指定数据包的 MTU.</span><br><span class="line">-b &lt;FTP relay host&gt;: 使用FTP bounce scan扫描方式</span><br><span class="line">-g： 指定发送的端口号</span><br><span class="line">-r: 不进行端口随机打乱的操作（如无该参数，nmap会将要扫描的端口以随机顺序方式扫描，以让nmap的扫描不易被对方防火墙检测到）</span><br><span class="line">-v 表示显示冗余信息，在扫描过程中显示扫描的细节，从而让用户了解当前的扫描状态</span><br><span class="line">-n : 表示不进行DNS解析；</span><br><span class="line">-D  &lt;decoy1,decoy2[,ME],...&gt;: 用一组 IP 地址掩盖真实地址，其中 ME 填入自己的 IP 地址</span><br><span class="line">-R ：表示总是进行DNS解析。 </span><br><span class="line">-F : 快速模式，仅扫描TOP <span class="number">100</span>的端口 </span><br><span class="line">-S &lt;IP_Address&gt;: 伪装成其他 IP 地址</span><br><span class="line">--ttl &lt;val&gt;: 设置 <span class="built_in">time</span>-to-live 时间</span><br><span class="line">--badsum: 使用错误的 checksum 来发送数据包（正常情况下，该类数据包被抛弃，如果收到回复，说明回复来自防火墙或 IDS/IPS）</span><br><span class="line">--dns-servers  : 指定DNS服务器</span><br><span class="line">--system-dns : 指定使用系统的DNS服务器   </span><br><span class="line">--traceroute : 追踪每个路由节点 </span><br><span class="line">--scanflags &lt;flags&gt;: 定制TCP包的flags</span><br><span class="line">--top-ports &lt;number&gt; :扫描开放概率最高的number个端口</span><br><span class="line">--port-ratio &lt;ratio&gt;: 扫描指定频率以上的端口。与上述--top-ports类似，这里以概率作为参数</span><br><span class="line">--version-trace: 显示出详细的版本侦测过程信息</span><br><span class="line">--osscan-limit: 限制Nmap只对确定的主机的进行OS探测（至少需确知该主机分别有一个open和closed的端口）</span><br><span class="line">--osscan-guess: 大胆猜测对方的主机的系统类型。由此准确性会下降不少，但会尽可能多为用户提供潜在的操作系统</span><br><span class="line">--data-length &lt;num&gt;: 填充随机数据让数据包长度达到 Num</span><br><span class="line">--ip-options &lt;options&gt;: 使用指定的 IP 选项来发送数据包</span><br><span class="line">--spoof-mac &lt;mac address/prefix/vendor name&gt; : 伪装 MAC 地址</span><br><span class="line">--version-intensity &lt;level&gt;: 指定版本侦测强度（<span class="number">0</span>-<span class="number">9</span>），默认为<span class="number">7</span>。数值越高，探测出的服务越准确，但是运行时间会比较长。</span><br><span class="line">--version-light: 指定使用轻量侦测方式 (intensity <span class="number">2</span>)</span><br><span class="line">--version-all: 尝试使用所有的probes进行侦测 (intensity <span class="number">9</span>)</span><br><span class="line">--version-trace: 显示出详细的版本侦测过程信息</span><br><span class="line">nmap <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">0</span>/<span class="number">24</span> -exclude <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">10</span>  #扫描除<span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">0</span>外的该网段的其他地址</span><br><span class="line">nmap <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">0</span>/<span class="number">24</span> -excludefile f:/<span class="number">1</span>.txt  #扫描除给定文件中的地址以外的其他地址</span><br><span class="line">nmap -sF -T4 <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">0</span> #探测防火墙状态</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="一-主机存活探测"><a href="#一-主机存活探测" class="headerlink" title="一. 主机存活探测"></a>一. 主机存活探测</h3><p>主机探测的原理类似于ping命令：发送探测包到目标主机，如果收到回复，说明主机是开启的。</p>
+<p>Nmap支持多种主机探测方式，可以在不同情况下灵活选择不同方式。</p>
+<p>主机探测的常用参数如下。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-sn: <span class="built_in">Ping</span> Scan 只进行主机发现，不进行端口扫描。</span><br><span class="line">-PE/PP/PM: 使用ICMP <span class="built_in">echo</span>/ICMP timestamp/ICMP netmask 请求包发现主机。</span><br><span class="line">-PS/PA/PU/PY[portlist]: 使用TCP SYN/TCP ACK或SCTP INIT/<span class="built_in">ECHO</span>方式进行发现。 </span><br><span class="line"> </span><br><span class="line">-sL: List Scan 列表扫描，仅将指定的目标的IP列举出来，不进行主机发现。 </span><br><span class="line">-Pn: 将所有指定的主机视作开启的，跳过主机发现的过程。</span><br><span class="line">-PO[protocollist]: 使用IP协议包探测对方主机是否开启。  </span><br><span class="line">-n/-R: -n表示不进行DNS解析；-R表示总是进行DNS解析。  </span><br><span class="line">--dns-servers &lt;serv1[,serv2],...&gt;: 指定DNS服务器。   </span><br><span class="line">--system-dns: 指定使用系统的DNS服务器   </span><br><span class="line">--traceroute: 追踪每个路由节点 </span><br></pre></td></tr></table></figure>
+
+<p>探测该主机所在的网段内所有主机的在线情况，使用<strong>nmap -sn 网段/子网掩码</strong>。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nmap -sn <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">0</span>/<span class="number">24</span></span><br><span class="line">或</span><br><span class="line">nmap -sn <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">100</span>-<span class="number">200</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-探测公网ip时"><a href="#1-探测公网ip时" class="headerlink" title="1. 探测公网ip时"></a>1. 探测公网ip时</h4><h5 id="nmap-sn"><a href="#nmap-sn" class="headerlink" title="nmap -sn"></a>nmap -sn</h5><p>Nmap会发送四种不同类型数据包来探测主机是否在线：ICMP echo request、a TCP SYN packer to port 443 (https)、a TCP ACK packet to port 80 (http)、an ICMP timestamp request。</p>
+<p>依次发送四个报文探测，只要收到其中一个回复就证明目标主机开启。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sn xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="nmap-PE-PP-PM"><a href="#nmap-PE-PP-PM" class="headerlink" title="nmap -PE/-PP/-PM"></a>nmap -PE/-PP/-PM</h5><ul>
+<li><p>-PE 的ICMP Echo扫描简单来说是通过向目标发送ICMP Echo数据包来探测目标主机是否存活，但由于许多主机的防火墙会禁止这些报文，所以仅仅ICMP扫描通常是不够的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -PE xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-PP 的ICMP time stamp时间戳扫描在大多数防火墙配置不当时可能会得到回复，可以以此方式来判断目标主机是否存活。倘若目标主机在线，该命令还会探测其开放的端口以及运行的服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -PP xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-PE 的ICMP address maskPing地址掩码扫描会试图用备选的ICMP等级Ping指定主机，通常有不错的穿透防火墙的效果</p>
+</li>
+<li><pre><code>nmap -PM xxx.xxx.xxx.xxx
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">#### 2. 探测内网ip时</span><br><span class="line"></span><br><span class="line">##### nmap -sn</span><br><span class="line"></span><br><span class="line">这个命令会发送ARP请求包探测目标ip是否在线，如果有ARP回复包，则说明在线。此命令可以探测目标主机是否在线，如果在线，还可以得到其MAC地址。但是不会探测其开放的端口号。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+nmap -sn 192.168.xxx.xxx
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### nmap -PE&#x2F;-PP&#x2F;-PM</span><br><span class="line"></span><br><span class="line">这三个参数探测内网主机的开启情况，使用的也是ARP请求报文。不同的是探测到主机在线后，还会探测主机的端口开启状态及运行的服务。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+nmap -PE/PP/PM 192.168.xxx.xxx
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 二. 端口扫描</span><br><span class="line"></span><br><span class="line">端口扫描是Nmap最基本最核心的功能，用于确定目标主机的TCP&#x2F;UDP端口的开放情况。</span><br><span class="line"></span><br><span class="line">默认情况下，Nmap会扫描1000个最有可能开放的TCP端口</span><br><span class="line"></span><br><span class="line">Nmap通过探测将端口划分为6个状态：</span><br><span class="line"></span><br><span class="line">1. open：端口是开放的。</span><br><span class="line">2. closed：端口是关闭的。</span><br><span class="line">3. filtered：端口被防火墙IDS&#x2F;IPS屏蔽，无法确定其状态。</span><br><span class="line">4. unfiltered：端口没有被屏蔽，但是否开放需要进一步确定。</span><br><span class="line">5. open|filtered：端口是开放的或被屏蔽，Nmap不能识别。</span><br><span class="line">6. closed|filtered ：端口是关闭的或被屏蔽，Nmap不能识别</span><br><span class="line"></span><br><span class="line">#### 1. 端口扫描常见参数及说明</span><br><span class="line"></span><br><span class="line">##### TCP SYN 扫描（-sS）</span><br><span class="line"></span><br><span class="line">**这是Nmap默认的扫描方式**，通常被称作半连接扫描。该方式发送SYN到目标端口，如果收到SYN&#x2F;ACK回复，那么可以判断端口是开放的；如果收到RST包，说明该端口是关闭的。如果没有收到回复，那么可以判断该端口被屏蔽了。因为该方式仅发送SYN包对目标主机的特定端口，但不建立完整的TCP连接，所以**相对比较隐蔽，而且效率比较高，适用范围广**。</span><br><span class="line"></span><br><span class="line">##### TCP connect 扫描（-sT）</span><br><span class="line"></span><br><span class="line">全连接扫描。TCP connect方式使用系统网络API connect向目标主机的端口发起连接，如果无法连接，说明该端口关闭。该方式扫描速度比较慢，而且由于建立完整的TCP连接**会在目标主机上留下大量记录信息，不够隐蔽**。所以，TCP connect是TCP SYN无法使用才考虑使用的方式。</span><br><span class="line"></span><br><span class="line">##### TCP ACK 扫描（-sA)</span><br><span class="line"></span><br><span class="line">向目标主机的端口发送ACK包，如果收到RST包，说明该端口没有被防火墙屏蔽；没有收到RST包，说明被屏蔽。该方式**只能用于确定防火墙是否屏蔽某个端口**，可以辅助TCP SYN的方式来判断目标主机防火墙的状况。</span><br><span class="line"></span><br><span class="line">##### TCP FIN&#x2F;Xmas&#x2F;NULL 扫描（-sN&#x2F;-sF&#x2F;sX)</span><br><span class="line"></span><br><span class="line">**这三种扫描方式被称为秘密扫描，相对比较隐蔽。**FIN扫描向目标主机的端口发送的TCP FIN 包或Xmas tree包或NULL包，如果收到对方的RST回复包，那么说明该端口是关闭的；没有收到RST包说明该端口可能是开放的或者被屏蔽了。其中Xmas tree包是指flags中FIN URG PUSH被置为1的TCP包；NULL包是指所有的flags都为0的TCP包。</span><br><span class="line"></span><br><span class="line">##### UDP 扫描（-sU）</span><br><span class="line"></span><br><span class="line">UDP扫描用于**判断UDP端口的情况**，向目标主机的UDP端口发送探测包，如果收到回复ICMP port unreachable就说明该端口是关闭的；如果没有收到回复，那说明该UDP端口可能是开放的或者屏蔽的。因此，通过反向排除法的方式来判断哪些UDP端口是可能处于开放状态的。</span><br><span class="line"></span><br><span class="line">##### 其他方式（-sY&#x2F;-sZ）</span><br><span class="line"></span><br><span class="line">除了以上几种常用的方式外，Nmap还支持多种其他的探测方式。例如使用SCTP INIT&#x2F;Cookie-ECHO方式是来探测SCTP的端口开放情况；使用IP protocol方式来探测目标主机支持的协议类型(tcp&#x2F;udp&#x2F;icmp&#x2F;sctp等等)；使用idle scan方式借助僵尸主机来扫描目标主机，以达到隐蔽自己的目的；或者使用FTP bounce scan，借助FTP允许的代理服务扫描其他的主机，同样达到隐蔽自己的目的。</span><br><span class="line"></span><br><span class="line">#### 2. 端口扫描用法</span><br><span class="line"></span><br><span class="line">扫描方式选项</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;cmd</span><br><span class="line">-sS&#x2F;sT&#x2F;sA&#x2F;sW&#x2F;sM:指定使用 TCP SYN&#x2F;Connect()&#x2F;ACK&#x2F;Window&#x2F;Maimon scans的方式来对目标主机进行扫描。 -sU: 指定使用UDP扫描方式确定目标主机的UDP端口状况。 -sN&#x2F;sF&#x2F;sX: 指定使用TCP Null, FIN, and Xmas scans秘密扫描方式来协助探测对方的TCP端口状态。 --scanflags &lt;flags&gt;: 定制TCP包的flags。 -sI &lt;zombiehost[:probeport]&gt;: 指定使用idle scan方式来扫描目标主机（前提需要找到合适的zombie host） -sY&#x2F;sZ: 使用SCTP INIT&#x2F;COOKIE-ECHO来扫描SCTP协议端口的开放的情况。 -sO: 使用IP protocol 扫描确定目标机支持的协议类型。 -b &lt;FTP relay host&gt;: 使用FTP bounce scan扫描方式</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p>端口参数与扫描顺序</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p &lt;port ranges&gt;: 扫描指定的端口 实例: -p <span class="number">22</span>; -p1-<span class="number">65535</span>; -p U:<span class="number">53</span>,<span class="number">111</span>,<span class="number">137</span>,T:<span class="number">21</span>-<span class="number">25</span>,<span class="number">80</span>,<span class="number">139</span>,<span class="number">8080</span>,S:<span class="number">9</span>（其中T代表TCP协议、U代表UDP协议、S代表SCTP协议） -F: Fast <span class="built_in">mode</span> – 快速模式，仅扫描TOP <span class="number">100</span>的端口 -r: 不进行端口随机打乱的操作（如无该参数，nmap会将要扫描的端口以随机顺序方式扫描，以让nmap的扫描不易被对方防火墙检测到）。 --top-ports &lt;number&gt;:扫描开放概率最高的number个端口（nmap的作者曾经做过大规模地互联网扫描，以此统计出网络上各种端口可能开放的概率。以此排列出最有可能开放端口的列表，具体可以参见文件：nmap-services。默认情况下，nmap会扫描最有可能的<span class="number">1000</span>个TCP端口） --port-ratio &lt;ratio&gt;: 扫描指定频率以上的端口。与上述--top-ports类似，这里以概率作为参数，让概率大于--port-ratio的端口才被扫描。显然参数必须在在<span class="number">0</span>到<span class="number">1</span>之间，具体范围概率情况可以查看nmap-services文件</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="简单扫描（nmap-ip）"><a href="#简单扫描（nmap-ip）" class="headerlink" title="简单扫描（nmap ip）"></a>简单扫描（nmap ip）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
+<p>在一次简单扫描中，Nmap会以默认TCP SYN扫描方式进行，仅判断目标端口是否开放，若开放，则列出端口对应的服务名称。</p>
+<h5 id="全面扫描（nmap-A-ip）"><a href="#全面扫描（nmap-A-ip）" class="headerlink" title="全面扫描（nmap -A ip）"></a>全面扫描（nmap -A ip）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
+<p>完全扫描是在确定端口开放之后，和该端口进行更多的数据交互，已获得更多的信息。完全扫描不仅仅是TCP协议上的通信交互，还有例如ICMP、HTTP、NBSS、TDS、POP等等协议的交互，这些协议是根据不同端口对应的不同服务进行服务版本信息探测、账户信息等信息的探测。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如: nmap -T4 -A -v xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="探测指定端口的开放状态"><a href="#探测指定端口的开放状态" class="headerlink" title="探测指定端口的开放状态"></a>探测指定端口的开放状态</h5><p>在默认情况下，Nmap对端口的扫描方式是从小到大进行的，或者是参照 nmap-services 中文件列出的端口进行扫描。<code>-p</code>选项可以指定一个端口号或者一个端口范围。</p>
+<p>注意：要既扫描TCP又扫描UDP，则需要指定<code>-sU</code>及至少一个TCP扫描类型（<code>-sS</code>(半连接扫描)，<code>-sT</code>(全连接扫描)等），同时需要在端口号前加上<code>T：</code>或<code>U：</code>来分别代表TCP和UDP协议，如果没有给定协议限定符，端口号会被加到所有协议列表。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap  -p  <span class="number">80</span>-<span class="number">445</span>  <span class="number">10</span>.<span class="number">96</span>.<span class="number">10</span>.<span class="number">246</span>     扫描目标主机的<span class="number">80</span>-<span class="number">445</span>端口的开放情况</span><br></pre></td></tr></table></figure>
+
+<p>若只简单的指定一个端口范围，Nmap会默认以TCP SYN方式扫描目标端口，若既想扫描目标TCP端口又想扫描UDP的端口，则需要指定扫描方式以及端口。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap  -sS   -sU  -p  T:<span class="number">80</span>,U:<span class="number">445</span>   <span class="number">10</span>.<span class="number">96</span>.<span class="number">10</span>.<span class="number">246</span>     以半连接的TCP SYN方式扫描目标主机的<span class="number">80</span>端口，以UDP方式扫描目标主机的<span class="number">445</span>端口</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="探测N个最有可能开放的端口"><a href="#探测N个最有可能开放的端口" class="headerlink" title="探测N个最有可能开放的端口"></a>探测N个最有可能开放的端口</h5><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -sU --top-ports <span class="number">100</span> xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
+<p>-sS表示使用TCP SYN方式扫描TCP端口；</p>
+<p>-sU表示扫描UDP端口；</p>
+<p>–top-ports 100表示扫描最有可能开放的100个端口（TCP和UDP分别100个端口）。</p>
+<h3 id="三-版本侦测"><a href="#三-版本侦测" class="headerlink" title="三. 版本侦测"></a>三. 版本侦测</h3><p>版本侦测，用于确定目标主机开放端口上运行的具体的应用程序及版本信息。</p>
+<p>Nmap提供的版本侦测具有如下的优点：</p>
+<ul>
+<li>高速。并行地进行套接字操作，实现一组高效的探测匹配定义语法。</li>
+<li>尽可能地确定应用名字与版本名字。</li>
+<li>支持TCP/UDP协议，支持文本格式与二进制格式。</li>
+<li>支持多种平台服务的侦测，包括Linux/Windows/Mac OS/FreeBSD等系统。</li>
+<li>如果检测到SSL，会调用openSSL继续侦测运行在SSL上的具体协议（如HTTPS/POP3S/IMAPS）。</li>
+<li>如果检测到SunRPC服务，那么会调用brute-force RPC grinder进一步确定RPC程序编号、名字、版本号。</li>
+<li>支持完整的IPv6功能，包括TCP/UDP，基于TCP的SSL。</li>
+<li>通用平台枚举功能（CPE）</li>
+<li>广泛的应用程序数据库（nmap-services-probes）。目前Nmap可以识别几千种服务的签名，包含了180多种不同的协议。</li>
+</ul>
+<h4 id="1-版本侦测原理"><a href="#1-版本侦测原理" class="headerlink" title="1. 版本侦测原理"></a>1. 版本侦测原理</h4><p>版本侦测主要分为以下几个步骤：</p>
+<ol>
+<li>首先检查open与open|filtered状态的端口是否在排除端口列表内。如果在排除列表，将该端口剔除。</li>
+<li>如果是TCP端口，尝试建立TCP连接。尝试等待片刻（通常6秒或更多，具体时间可以查询文件nmap-services-probes中Probe TCP NULL q||对应的totalwaitms）。通常在等待时间内，会接收到目标机发送的“WelcomeBanner”信息。nmap将接收到的Banner与nmap-services-probes中NULL probe中的签名进行对比。查找对应应用程序的名字与版本信息。</li>
+<li>如果通过“Welcome Banner”无法确定应用程序版本，那么nmap再尝试发送其他的探测包（即从nmap-services-probes中挑选合适的probe），将probe得到回复包与数据库中的签名进行对比。如果反复探测都无法得出具体应用，那么打印出应用返回报文，让用户自行进一步判定。</li>
+<li>如果是UDP端口，那么直接使用nmap-services-probes中探测包进行探测匹配。根据结果对比分析出UDP应用服务类型。</li>
+<li>如果探测到应用程序是SSL，那么调用openSSL进一步的侦查运行在SSL之上的具体的应用类型。</li>
+<li>如果探测到应用程序是SunRPC，那么调用brute-force RPC grinder进一步探测具体服务。</li>
+</ol>
+<h4 id="2-版本侦测用法"><a href="#2-版本侦测用法" class="headerlink" title="2. 版本侦测用法"></a>2. 版本侦测用法</h4><p>比如目标主机把SSH的22号端口改成了2222端口，那么如果使用普通扫描只会发现2222端口是开启的，并不能知道2222号端口上运行的程序，通过加参数 <code>-sV</code> 进行版本扫描，可以探测到目标主机上2222端口运行的是SSH服务。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
+<p>版本侦测的常用参数：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-sV: 指定让Nmap进行版本侦测 --version-intensity &lt;level&gt;: 指定版本侦测强度（<span class="number">0</span>-<span class="number">9</span>），默认为<span class="number">7</span>。数值越高，探测出的服务越准确，但是运行时间会比较长。 --version-light: 指定使用轻量侦测方式 (intensity <span class="number">2</span>) --version-all: 尝试使用所有的probes进行侦测 (intensity <span class="number">9</span>) --version-trace: 显示出详细的版本侦测过程信息</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="四-OS侦测"><a href="#四-OS侦测" class="headerlink" title="四. OS侦测"></a>四. OS侦测</h3><p>操作系统侦测用于检测目标主机运行的操作系统类型及设备类型等信息。</p>
+<h4 id="1-OS侦测原理"><a href="#1-OS侦测原理" class="headerlink" title="1. OS侦测原理"></a>1. OS侦测原理</h4><p>Nmap使用TCP/IP协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由此不同的TCP/IP方案中可能都有自己的特定方式。Nmap主要是根据这些细节上的差异来判断操作系统的类型的。</p>
+<p>具体实现方式如下：</p>
+<ol>
+<li>Nmap内部包含了2600多已知系统的指纹特征（在文件nmap-os-db文件中）。将此指纹数据库作为进行指纹对比的样本库。</li>
+<li>分别挑选一个open和closed的端口，向其发送经过精心设计的TCP/UDP/ICMP数据包，根据返回的数据包生成一份系统指纹。</li>
+<li>将探测生成的指纹与nmap-os-db中指纹进行对比，查找匹配的系统。如果无法匹配，以概率形式列举出可能的系统。</li>
+</ol>
+<h4 id="2-OS侦测用法"><a href="#2-OS侦测用法" class="headerlink" title="2. OS侦测用法"></a>2. OS侦测用法</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-O: 指定Nmap进行OS侦测。 --osscan-limit: 限制Nmap只对确定的主机的进行OS探测（至少需确知该主机分别有一个open和closed的端口）。 --osscan-guess: 大胆猜测对方的主机的系统类型。由此准确性会下降不少，但会尽可能多为用户提供潜在的操作系统</span><br></pre></td></tr></table></figure>
+
+<p>使用实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -O xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="五-Nmap高级用法"><a href="#五-Nmap高级用法" class="headerlink" title="五. Nmap高级用法"></a>五. Nmap高级用法</h3><h4 id="1-防火墙-IDS规避"><a href="#1-防火墙-IDS规避" class="headerlink" title="1. 防火墙/IDS规避"></a>1. 防火墙/IDS规避</h4><p>防火墙与IDS规避为用于绕开防火墙与IDS的检测与屏蔽，以便能够更加详细地发现目标主机的状况。</p>
+<p>nmap提供了多种规避技巧，通常可以从两个方面考虑规避方式：数据包的变换(Packet Change)和时序变换(Timing Change)。</p>
+<p>常用参数：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-f; --mtu &lt;val&gt;: 指定使用分片、指定数据包的 MTU.-D &lt;decoy1,decoy2[,ME],...&gt;: 用一组 IP 地址掩盖真实地址，其中 ME 填入自己的 IP 地址。-S &lt;IP_Address&gt;: 伪装成其他 IP 地址-e &lt;iface&gt;: 使用特定的网络接口-g/--source-port &lt;portnum&gt;: 使用指定源端口--data-length &lt;num&gt;: 填充随机数据让数据包长度达到 Num。--ip-options &lt;options&gt;: 使用指定的 IP 选项来发送数据包。--ttl &lt;val&gt;: 设置 <span class="built_in">time</span>-to-live 时间。--spoof-mac &lt;mac address/prefix/vendor name&gt;: 伪装 MAC 地址--badsum: 使用错误的 checksum 来发送数据包（正常情况下，该类数据包被抛弃，如果收到回复，说明回复来自防火墙或 IDS/IPS）</span><br></pre></td></tr></table></figure>
+
+<p>使用实例：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -F -Pn -D <span class="number">104</span>.<span class="number">193</span>.<span class="number">88</span>.<span class="number">110</span>,<span class="number">104</span>.<span class="number">193</span>.<span class="number">88</span>.<span class="number">120</span>,ME  -e eth0  -g <span class="number">5555</span> xxx.xxx.xxx.xxx -F参数表示快速扫描<span class="number">100</span>个端口，-Pn不进行<span class="built_in">ping</span>扫描，-D表示使用ip诱骗方式掩饰真实ip，使用的假ip是<span class="number">10</span>.<span class="number">96</span>.<span class="number">10</span>.<span class="number">100</span>和<span class="number">10</span>.<span class="number">96</span>.<span class="number">10</span>.<span class="number">110</span>，ME表示自己真实的ip，-e 参数指定eth0网卡发送数据包，-g参数指定发送的端口号</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h5><p>将可疑的探测包进行分片处理(例如将TCP包拆分成多个IP包发送过去)，某些简单的防火墙为了加快处理速度可能不会进行重组检查，以此避开其检查。</p>
+<h5 id="IP诱骗（IP-decoys）"><a href="#IP诱骗（IP-decoys）" class="headerlink" title="IP诱骗（IP decoys）"></a>IP诱骗（IP decoys）</h5><p>在进行扫描时，将真实IP地址在和其他主机的IP地址混合使用(其他主机需要在线，否则目标主机将回复大量数据包到不存在的数主机，从而实质构成了DOS攻击)，以此让目标主机的防火墙或IDS追踪大量的不同IP地址的数据包，降低其追查到自身的概率。但是，某些高级的IDS系统通过统计分析仍然可以追踪出扫描者真实的IP地址。</p>
+<h5 id="IP伪装"><a href="#IP伪装" class="headerlink" title="IP伪装"></a>IP伪装</h5><p>IP伪装就是将自己发送的数据包中的IP地址伪装成其他主机的地址，从而目标机认为是其他主机与之通信。需要注意的是，如果希望接收到目标主机的回复包，那么伪装的IP需要位于统一局域网内。另外，如果既希望隐蔽自己的IP地址，又希望收到目标主机的回复包，那么可以尝试使用idle scan 或匿名代理等网络技术。</p>
+<h5 id="指定源端口"><a href="#指定源端口" class="headerlink" title="指定源端口"></a>指定源端口</h5><p>某些目标主机只允许来自特定端口的数据包通过防火墙。例如，FTP服务器的配置为允许源端口为21号的TCP包通过防火墙与FTP服务器通信，但是源端口为其他的数据包被屏蔽。所以，在此类情况下，可以指定数据包的源端口。</p>
+<h5 id="扫描延时"><a href="#扫描延时" class="headerlink" title="扫描延时"></a>扫描延时</h5><p>某些防火墙针对发送过于频繁的数据包会进行严格的侦查，而且某些系统限制错误报文产生的频率。所以，我们可以降低发包的频率和发包延时以此降低目标主机的审查强度</p>
+<h5 id="其他技术"><a href="#其他技术" class="headerlink" title="其他技术"></a>其他技术</h5><p>nmap还提供其他多种规避技巧，比如指定使用某个网络接口来发送数据包、指定发送包的最小长度、指定发包的MTU、指定TTL、指定伪装的MAC地址，使用错误检查。</p>
+<h4 id="2-NSE脚本引擎"><a href="#2-NSE脚本引擎" class="headerlink" title="2. NSE脚本引擎"></a>2. NSE脚本引擎</h4><p>NSE脚本引擎(Nmap Scripting Engine)是nmap最强大，最灵活的功能之一，允许用户自己编写脚本来执行自动化的操作或者扩展nmap的功能。</p>
+<p>nmap的脚本库的路径：/usr/share/nmap/scripts 或 /xx/nmap/scripts/ ，该目录下的文件都是nse脚本。</p>
+<p>NSE使用Lua脚本语言，并且默认提供了丰富的脚本库，目前已经包含了14个类别的350多个脚本。NSE的设计初衷主要考虑以下几个方面</p>
+<ul>
+<li>网络发现（Network Discovery）</li>
+<li>更加复杂的版本侦测（例如 skype 软件）</li>
+<li>漏洞侦测(Vulnerability Detection)</li>
+<li>后门侦测(Backdoor Detection)</li>
+<li>漏洞利用(Vulnerability Exploitation)</li>
+</ul>
+<p><strong>Nmap的脚本主要分为以下几类：</strong></p>
+<ul>
+<li>Auth：负责处理鉴权证书(绕过鉴权)的脚本</li>
+<li>Broadcast：在局域网内探查更多服务去开启情况，如DHCP/DNS等</li>
+<li>Brute：针对常见的应用提供暴力破解方式，如HTTP/HTTPS</li>
+<li>Default：使用-sC或-A选项扫描时默认的脚本，提供基本的脚本扫描能力</li>
+<li>Discovery：对网络进行更多的信息搜集，如SMB枚举，SNMP查询等</li>
+<li>Dos：用于进行拒绝服务攻击</li>
+<li>Exploit：利用已知的漏洞入侵系统</li>
+<li>External：利用第三方的数据库或资源 。如，进行whois解析</li>
+<li>Fuzzer：模糊测试脚本，发送异常的包到目标机，探测出潜在漏洞</li>
+<li>Intrusive：入侵性的脚本，此类脚本可能引发对方的IDS/IPS的记录或屏蔽</li>
+<li>Malware：探测目标是否感染了病毒，开启后门等</li>
+<li>Safe：与Intrusive相反，属于安全性脚本</li>
+<li>Version：负责增强服务与版本扫描功能的脚本</li>
+<li>Vuln：负责检查目标机是否有常见漏洞，如MS08-067</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如：nmap -script   smb-vuln-ms17-<span class="number">010</span>  <span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">34</span>     #可以探测该主机是否存在ms17_010漏洞nmap --max-parallelism <span class="number">800</span> --script http-slowloris scanme.nmap.org  #可以探测该主机是否存在http拒绝服务攻击漏洞nmap -script http-iis-short-name-brute <span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">34</span>  #探测是否存在IIS短文件名漏洞nmap -script mysql-empty-password <span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">34</span>       #验证mysql匿名访问nmap -p <span class="number">443</span> -script ssl-ccs-injection <span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">34</span>   #验证是否存在openssl CCS注入漏洞 --script=http-waf-detect            #验证主机是否存在WAF--script=http-waf-fingerprint       #验证主机是否存在WAF nmap --script-brute <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">1</span>     #nmap可对数据库、SMB、SNMP等进行简单密码的暴力破解nmap --script-vuln  <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">1</span>     #扫描是否有常见漏洞 --script-updatedb         #更新脚本数据库--script-<span class="built_in">help</span>             #输入脚本对应的使用方法</span><br></pre></td></tr></table></figure>
+
 
     
 
@@ -302,7 +465,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://www.squidward.xyz/2021/05/10/nmap使用心得/" title="nmap使用心得" target="_blank">http://www.squidward.xyz/2021/05/10/nmap使用心得/</a>
+          <a href="http://www.squidward.xyz/2021/05/10/nmap使用心得/" title="nmap使用详解" target="_blank">http://www.squidward.xyz/2021/05/10/nmap使用心得/</a>
         </li>
         
         <li>
@@ -433,7 +596,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nmap%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Nmap简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E4%B8%BB%E6%9C%BA%E5%AD%98%E6%B4%BB%E6%8E%A2%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text">一. 主机存活探测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8E%A2%E6%B5%8B%E5%85%AC%E7%BD%91ip%E6%97%B6"><span class="toc-number">2.1.</span> <span class="toc-text">1. 探测公网ip时</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#nmap-sn"><span class="toc-number">2.1.1.</span> <span class="toc-text">nmap -sn</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nmap-PE-PP-PM"><span class="toc-number">2.1.2.</span> <span class="toc-text">nmap -PE&#x2F;-PP&#x2F;-PM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%89%AB%E6%8F%8F%EF%BC%88nmap-ip%EF%BC%89"><span class="toc-number">2.1.3.</span> <span class="toc-text">简单扫描（nmap ip）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%A8%E9%9D%A2%E6%89%AB%E6%8F%8F%EF%BC%88nmap-A-ip%EF%BC%89"><span class="toc-number">2.1.4.</span> <span class="toc-text">全面扫描（nmap -A ip）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A2%E6%B5%8B%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%BC%80%E6%94%BE%E7%8A%B6%E6%80%81"><span class="toc-number">2.1.5.</span> <span class="toc-text">探测指定端口的开放状态</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A2%E6%B5%8BN%E4%B8%AA%E6%9C%80%E6%9C%89%E5%8F%AF%E8%83%BD%E5%BC%80%E6%94%BE%E7%9A%84%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.1.6.</span> <span class="toc-text">探测N个最有可能开放的端口</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E7%89%88%E6%9C%AC%E4%BE%A6%E6%B5%8B"><span class="toc-number">3.</span> <span class="toc-text">三. 版本侦测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%89%88%E6%9C%AC%E4%BE%A6%E6%B5%8B%E5%8E%9F%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">1. 版本侦测原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%89%88%E6%9C%AC%E4%BE%A6%E6%B5%8B%E7%94%A8%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">2. 版本侦测用法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-OS%E4%BE%A6%E6%B5%8B"><span class="toc-number">4.</span> <span class="toc-text">四. OS侦测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-OS%E4%BE%A6%E6%B5%8B%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">1. OS侦测原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-OS%E4%BE%A6%E6%B5%8B%E7%94%A8%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">2. OS侦测用法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94-Nmap%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">五. Nmap高级用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%98%B2%E7%81%AB%E5%A2%99-IDS%E8%A7%84%E9%81%BF"><span class="toc-number">5.1.</span> <span class="toc-text">1. 防火墙&#x2F;IDS规避</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%89%87"><span class="toc-number">5.1.1.</span> <span class="toc-text">分片</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IP%E8%AF%B1%E9%AA%97%EF%BC%88IP-decoys%EF%BC%89"><span class="toc-number">5.1.2.</span> <span class="toc-text">IP诱骗（IP decoys）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IP%E4%BC%AA%E8%A3%85"><span class="toc-number">5.1.3.</span> <span class="toc-text">IP伪装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E6%BA%90%E7%AB%AF%E5%8F%A3"><span class="toc-number">5.1.4.</span> <span class="toc-text">指定源端口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E5%BB%B6%E6%97%B6"><span class="toc-number">5.1.5.</span> <span class="toc-text">扫描延时</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF"><span class="toc-number">5.1.6.</span> <span class="toc-text">其他技术</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-NSE%E8%84%9A%E6%9C%AC%E5%BC%95%E6%93%8E"><span class="toc-number">5.2.</span> <span class="toc-text">2. NSE脚本引擎</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
