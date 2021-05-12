@@ -18,7 +18,7 @@
 <meta property="og:description" content="Nmap使用详解">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-10T11:28:40.000Z">
-<meta property="article:modified_time" content="2021-05-12T10:39:04.322Z">
+<meta property="article:modified_time" content="2021-05-12T10:40:24.616Z">
 <meta property="article:author" content="Squidward">
 <meta property="article:tag" content="Tools">
 <meta name="twitter:card" content="summary">
@@ -290,7 +290,7 @@
 <li><p>-PP 的ICMP time stamp时间戳扫描在大多数防火墙配置不当时可能会得到回复，可以以此方式来判断目标主机是否存活。倘若目标主机在线，该命令还会探测其开放的端口以及运行的服务。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -PP xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>-PE 的ICMP address maskPing地址掩码扫描会试图用备选的ICMP等级Ping指定主机，通常有不错的穿透防火墙的效果</p>
+<li><p>-PE 的ICMP address maskPing地址掩码扫描会试图用备选的ICMP等级Ping指定主机，通常有不错的穿透防火墙的效果。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -PM xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
 
 
